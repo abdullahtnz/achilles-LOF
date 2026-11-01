@@ -1,0 +1,223 @@
+ACHILLES: THE LOOM OF FATE
+Final Story & Design Bible — v1.0 (Ready to Build)
+1. CORE PREMISE
+
+You are Achilles, the greatest warrior of the Greek age. The game is not a retelling of the Trojan War — it is the weaving of your legend, told across many deaths. Each run is one telling of the myth. The Fates weave; you fight; you die; the thread is cut and re-spun.
+
+The one rule that defines everything: You are invulnerable everywhere except your heel. Any blow that lands there ends the run. You are a god among men with a single, permanent, fatal flaw — and the entire game is built around that truth.
+
+The thematic question: Is glory worth dying for — and if you could choose again, would you?
+2. NARRATIVE FRAME — THE LOOM OF FATE
+
+Prologue (first launch only):
+Thetis, your mother, is told by the Fates: "Your son will be great, but short-lived. He will die beneath Troy — unless he forsakes glory and lives long in obscurity." She dips you in the Styx. You become near-immortal — save the heel she held.
+
+On the eve of war, you hide among the women of Skyros. Odysseus finds you. You choose the sword.
+
+The fracture: The moment you draw the blade, the world tears open. You fall into the Loom of Fate — a liminal space where your myth is being woven. Three sisters — the Moirai — sit at the loom. One speaks:
+
+    "You have chosen the short, bright thread. Very well. We will weave it — again and again — until you understand what you have chosen."
+
+Each run is a thread. Each death, a strand cut. The Loom persists between runs. The Fates remember. You remember (meta-progression = Kleos/Glory).
+3. THE SIX LAYERS (RUN STRUCTURE)
+
+Each layer = one zone. Linear progression, escalating difficulty, story revealed layer by layer. Death sends you back to Layer 1 — but Kleos and unlocked knowledge persist.
+Layer 1 — PHTHIA: The Training Grounds
+
+Theme: The boy becomes the weapon.
+
+    Setting: Sunlit cliffs, olive groves, the centaur's cave.
+
+    Enemies: Sparring phantoms of old tutors, wild boars, phantom hoplites.
+
+    Story beats: Chiron trains you. Thetis watches from the sea, weeping.
+
+    Boss: Phantom of Chiron — a footwork/speed test. He targets your heel deliberately to teach you.
+
+    Unlocks after first clear: Spear (starting weapon), basic dodge.
+
+Layer 2 — SKYROS: The Court of Women
+
+Theme: The sword chosen over the spindle.
+
+    Setting: Marble halls, hanging tapestries, trap-laden courtyards.
+
+    Enemies: Illusions, mirrored duelists, Lycomedes' guards.
+
+    Story beats: Deidamia, the princess you loved and abandoned, confronts you. Odysseus lurks as a merchant NPC.
+
+    Boss: Deidamia's Grief — a spectral queen whose attacks mirror your own moves. Defeating her = choosing war over love.
+
+    Unlocks: Sword, first god-boon slot.
+
+Layer 3 — THE SHORES OF TROY: The War Camp
+
+Theme: The host gathers; the first blood spills.
+
+    Setting: Beached ships, tents, burning watchfires, open battlefield.
+
+    Enemies: Trojan soldiers, archers, charioteers, war-dogs.
+
+    Story beats: Patroclus joins as a companion NPC. He can die here (or later). His presence is a buff; his death is a permanent curse for the rest of that run.
+
+    Boss: Hector's Vanguard — an elite Trojan captain, shield-wall mechanics.
+
+    Unlocks: Shield, Ares/Athena boon paths.
+
+Layer 4 — THE PLAIN OF SCAMANDER: The Rampage
+
+Theme: Wrath becomes slaughter.
+
+    Setting: A river plain choked with the dead. The water rises as you kill.
+
+    Enemies: Drowning soldiers, river-nymphs, corpse-puppets.
+
+    Story beats: Your rage is now a mechanic — a meter that empowers you but summons the flood. Kill too much, and Scamander drowns the arena.
+
+    Boss: Scamander — an elemental boss. You must fight while outrunning rising water; the river attacks in waves.
+
+    Unlocks: Rage meter, Hermes speed boons.
+
+Layer 5 — THE WALLS OF TROY: Hector
+
+Theme: The greatest duel.
+
+    Setting: The Scaean Gate, the walls, the plain before the city.
+
+    Enemies: Wall defenders, Apollo's archers (foreshadowing!), Hector's honor guard.
+
+    Story beats: Hector — noble, doomed, fighting for his family. The duel is the emotional center of the game. When he falls, you drag his body while Trojan ghosts claw at you. The game forces you forward. You cannot stop.
+
+    Boss: Hector, Prince of Troy — a mirror-duel. He fights with honor; you fight with fury.
+
+    Unlocks: Chariot, Patroclus-memory fragments.
+
+Layer 6 — THE GATE OF HORN: The Descent
+
+Theme: The prophecy comes due.
+
+    Setting: The Loom itself — a cosmic underworld of threads, looms, and cut strands.
+
+    Enemies: Phantoms of your own past deaths — every run you've lost, now hunting you. They use your old builds.
+
+    Story beats: The Fates speak directly. They show you Patroclus's death — the true anchor of your doom. "You did not die of an arrow. You died of grief and rage. The arrow was only the instrument."
+
+    Boss: The Moirai — three sisters fighting as one: Clotho spins (summons), Lachesis measures (tethers you), Atropos cuts (executes — targets the heel relentlessly).
+
+    Unlocks: The final layer; the truth of the loop.
+
+Final Layer — THE SCAEAN GATE: The Heel
+
+Theme: Paris's arrow finds its mark.
+
+    Setting: The gate at dusk. Apollo's light on the walls. One archer.
+
+    Enemies: Ghost of Hector, Apollo's divine archers, the light itself.
+
+    Boss: Apollo's Chosen (Paris + Divine Guidance) — Paris aims for the heel; Apollo guides the arrow. The heel is targeted constantly. You must protect it while landing killing blows. This is the hardest fight in the game — by design.
+
+    Ending: See Section 7.
+
+4. CHARACTER ROSTER
+Character	Role	Arc
+Achilles	Player	From glory-hungry youth to a man who understands what glory costs
+Thetis	Between-run NPC	Offers boons, warns of doom, grieves — she chose this fate for you
+Patroclus	Companion (Layer 3+)	The heart of the story. His death is the true anchor of the loop
+Chiron	Mentor (Layer 1 boss → boon-giver)	Teaches footwork; later gives training boons
+Odysseus	Trickster merchant NPC	Sells items, drops lore, sometimes lies
+Deidamia	Layer 2 boss	The love you abandoned; her grief is a mirror
+Hector	Layer 5 boss	Noble rival; his ghost haunts Layer 6
+The Moirai	Layer 6 boss / meta-narrators	Weave your fate; comment on every run
+Apollo	Hidden antagonist	Guides Paris's arrow; the divine will behind your death
+Ares / Athena	Opposing boon-givers	Rage vs. tactics — two philosophies of war
+5. BOON SYSTEM (GODS)
+
+Each god offers a philosophy, not just a stat boost. Boons shape how you play — and how the story reads.
+God	Boon Theme	Playstyle	Story Meaning
+Ares	Rage, bloodlust, damage	Aggressive, high-risk	Wrath — the path that doomed you
+Athena	Tactics, defense, precision	Methodical, safe	Wisdom — the path you didn't take
+Hermes	Speed, dodge, mobility	Evasive	The swift feet that couldn't outrun fate
+Apollo	(Hidden/Corrupting)	—	The god who kills you; boons are traps/temptations
+Thetis	Protective, heel-guarding	Defensive utility	A mother's love, weaponized
+
+Design note: Ares and Athena boons are mutually exclusive per run — you commit to a philosophy. This creates narrative variance and replayability.
+6. DEATH, KLEOS & META-PROGRESSION
+
+    Death = the heel. A heel-hit ends the run instantly. Everything else you can tank (you're invulnerable elsewhere). Heel-targeting enemies appear from Layer 2 onward and become relentless by Layer 6.
+
+    Kleos (Glory) = currency earned per run (kills, layers cleared, bosses felled, story fragments found).
+
+    Spend Kleos between runs to unlock:
+
+        Weapons: Spear → Sword → Shield → Chariot → Bow (yes, you can wield the weapon that kills you — thematic)
+
+        Boon slots and god paths
+
+        Memory Fragments — lore entries that reveal the full prophecy and unlock the True Ending
+
+    The Loom persists. The Fates comment on your progress between runs. Dialogue changes based on run count, deaths, and fragments collected.
+
+    Death counter = your legend. The final screen shows your name carved into myth; the run counter becomes your kleos. The more you die, the more the myth grows — the loop is the point.
+
+7. ENDINGS (THREE)
+Ending A — KLEOS (Default)
+
+Die at the Scaean Gate. The arrow finds your heel. The Fates cut the thread. Your name is carved into myth: "Greatest of the Greeks, short-lived, never forgotten." The Loom re-spins. Loop continues.
+
+    You chose glory. Glory chose you back. The thread is cut — and woven again.
+
+Ending B — THE PHANTOM (Failure/Loop Ending)
+
+Die too many times consumed by rage (Ares path, high death count, Patroclus dead every run). You become a phantom in Layer 6 — one of the past-deaths that hunts future Achilles. The Loom recycles you as an enemy. Unlocks Hard Mode: "The Nameless Thread."
+Ending C — THE TRUE ENDING (requires all Memory Fragments)
+
+In Layer 6, with every fragment collected, you learn the truth: you did not die of an arrow. You died of grief and rage for Patroclus. The arrow was only the instrument. The loop exists to teach you to grieve — not to rage.
+
+At the Scaean Gate, you are given a choice:
+
+    Accept the arrow → Ending A (glory, but now understood).
+
+    Refuse Apollo's framing → You lower your guard, speak Patroclus's name, and choose your own death on your terms. The Fates pause. Atropos does not cut — she ties. Your thread becomes part of the Loom itself. You become a weaver, not a thread.
+
+    "You cannot avoid death. You can only make it yours. The heel was never the weakness. The rage was."
+
+Ending C = kleos transformed into something human. The game acknowledges that even this is a story — and lets you rest.
+8. TONE & DIALOGUE GUIDE
+
+    Epic, spare, Homeric. Short sentences. Concrete imagery. No purple prose.
+
+    The Fates speak in riddles and weaving metaphors. Thetis speaks in grief and sea-imagery. Patroclus speaks plainly — he is the human heart of the story.
+
+    Boss dialogue is tragic, not villainous. Hector begs for his body to be returned. Deidamia asks why you left. Scamander accuses you of choking his waters with the dead.
+
+    The game never mocks the myth. It takes glory seriously — and then asks what it costs.
+
+Sample — Thetis between runs:
+
+    "I held you by the heel and burned the rest of you mortal away. I thought I was saving you. The Fates are still laughing, my son. Go. Die well. Come back to me."
+
+Sample — The Moirai (Layer 6):
+
+    Clotho: "Spin the thread."
+    Lachesis: "Measure the life."
+    Atropos: "Cut — unless he gives us a reason not to."*
+
+9. PRACTICAL NOTES FOR YOUR TERMINAL BUILD
+
+    Text-first, ASCII-visual. Bosses get ASCII art intro screens. Layers get descriptive text + a simple map/room indicator.
+
+    Run length: 20–35 min per run. Six layers, ~5–7 encounters each, boss at the end.
+
+    Input: menu-driven choices (attack/dodge/boon/item) or simple command parsing — your call. Menu is more reliable for a first build.
+
+    State machine: MENU → LAYER → ENCOUNTER → BOSS → DEATH/ADVANCE → LOOM (meta) → repeat.
+
+    Persistence: JSON save for Kleos, unlocks, fragments, death count, Fates dialogue flags.
+
+    Variable hooks for story: run_count, patroclus_alive, ares_athena_path, fragments_collected, heel_hits_taken — feed these into dialogue and ending logic.
+
+    Build order suggestion: Layer 1 + heel-death loop + Kleos → Layer 2 → boons → Layers 3–4 → Hector → Layer 6 → endings. Test the heel mechanic first — it's the whole game.
+
+10. ONE-LINE PITCH
+
+    A roguelike where you are invincible everywhere but your heel — and every death is a verse in the legend you chose over a long, forgotten life.
