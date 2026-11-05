@@ -7,7 +7,7 @@
 #include "json.hpp"
 
 // ----- Save version (bump when MetaState/RunState schema changes) -----
-inline constexpr int SAVE_VERSION = 1;
+inline constexpr int SAVE_VERSION = 2;
 
 // ----- Which ending the player has seen -----
 enum class Ending { None, A_Kleos, B_Phantom, C_True };
@@ -15,28 +15,30 @@ enum class Ending { None, A_Kleos, B_Phantom, C_True };
 // ----- Persistent meta-progression (survives every run) -----
 struct MetaState {
     int         save_version        = SAVE_VERSION;
-    uint64_t    kleos               = 0;      // currency
+    uint64_t    kleos               = 0;
     uint32_t    total_deaths        = 0;
     uint32_t    total_runs          = 0;
     std::vector<std::string> unlocked_weapons { "spear" };
-    std::vector<std::string> unlocked_boons;             // god path names
-    std::set<std::string>    fragments_collected;        // fragment ids
-    std::map<std::string,int> fates_flags;               // dialogue flags
-    std::vector<std::string> endings_seen;               // "A","B","C"
+    std::vector<std::string> unlocked_boons;
+    std::set<std::string>    fragments_collected;
+    std::map<std::string,int> fates_flags;
+    std::vector<std::string> endings_seen;
     uint32_t    patroclus_death_count = 0;
     bool        first_launch_seen    = false;
 };
 
 // ----- Per-run state (cleared after each run) -----
 struct RunState {
-    int         layer              = 1;
-    int         encounter          = 0;
-    std::string path;                                    // "ares" | "athena" | ""
+    int         layer                    = 1;
+    int         encounter                = 0;
+    std::string path;                              // "ares" | "athena" | ""
     std::vector<std::string> boons;
-    bool        patroclus_alive    = false;
-    int         heel_hits_taken    = 0;                  // always 0 or 1 per run (1 = dead)
-    int         rage               = 0;
-    uint32_t    run_kleos          = 0;
+    bool        patroclus_alive          = false;
+    bool        patroclus_dead_this_run  = false;
+    bool        boon_chosen              = false;
+    int         heel_hits_taken          = 0;
+    int         rage                     = 0;
+    uint32_t    run_kleos                = 0;
     std::set<std::string> fragments_this_run;
 };
 
@@ -45,7 +47,7 @@ struct Settings {
     bool        first_launch_done = false;
 };
 
-// ----- JSON serialization (declared here, defined inline) -----
+// ----- JSON serialization -----
 inline void to_json(nlohmann::json& j, const MetaState& m) {
     j = nlohmann::json{
         {"save_version", m.save_version},
@@ -83,6 +85,8 @@ inline void to_json(nlohmann::json& j, const RunState& r) {
         {"path", r.path},
         {"boons", r.boons},
         {"patroclus_alive", r.patroclus_alive},
+        {"patroclus_dead_this_run", r.patroclus_dead_this_run},
+        {"boon_chosen", r.boon_chosen},
         {"heel_hits_taken", r.heel_hits_taken},
         {"rage", r.rage},
         {"run_kleos", r.run_kleos},
@@ -91,15 +95,17 @@ inline void to_json(nlohmann::json& j, const RunState& r) {
 }
 
 inline void from_json(const nlohmann::json& j, RunState& r) {
-    r.layer              = j.value("layer", 1);
-    r.encounter          = j.value("encounter", 0);
-    r.path               = j.value("path", std::string{});
-    r.boons              = j.value("boons", std::vector<std::string>{});
-    r.patroclus_alive    = j.value("patroclus_alive", false);
-    r.heel_hits_taken    = j.value("heel_hits_taken", 0);
-    r.rage               = j.value("rage", 0);
-    r.run_kleos          = j.value("run_kleos", 0u);
-    r.fragments_this_run = j.value("fragments_this_run", std::set<std::string>{});
+    r.layer                   = j.value("layer", 1);
+    r.encounter               = j.value("encounter", 0);
+    r.path                    = j.value("path", std::string{});
+    r.boons                   = j.value("boons", std::vector<std::string>{});
+    r.patroclus_alive         = j.value("patroclus_alive", false);
+    r.patroclus_dead_this_run = j.value("patroclus_dead_this_run", false);
+    r.boon_chosen             = j.value("boon_chosen", false);
+    r.heel_hits_taken         = j.value("heel_hits_taken", 0);
+    r.rage                    = j.value("rage", 0);
+    r.run_kleos               = j.value("run_kleos", 0u);
+    r.fragments_this_run      = j.value("fragments_this_run", std::set<std::string>{});
 }
 
 inline void to_json(nlohmann::json& j, const Settings& s) {

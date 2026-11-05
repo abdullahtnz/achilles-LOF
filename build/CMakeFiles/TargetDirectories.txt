@@ -1,0 +1,3 @@
+/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles/achilles.dir
+/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles/edit_cache.dir
+/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles/rebuild_cache.dir
