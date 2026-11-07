@@ -110,6 +110,26 @@ void draw_bar(int y, int x, int w, double pct, Attr fill, Attr empty) {
     draw(y, x + n, std::string(w - n, '.'), empty);
 }
 
+void draw_big_bar(int y, int x, int w, double pct, Attr fill, Attr shadow) {
+    if (pct < 0) pct = 0;
+    if (pct > 1) pct = 1;
+    int n = (int)(pct * w);
+    if (n > w) n = w;
+
+    // Top row: solid block for filled, light shade for empty.
+    std::string top_fill;
+    std::string top_empty;
+    for (int i = 0; i < n; ++i)     top_fill  += "\u2588";  // █
+    for (int i = 0; i < w - n; ++i) top_empty += "\u2591";  // ░
+    draw(y, x, top_fill, fill);
+    draw(y, x + n, top_empty, shadow);
+
+    // Bottom row: full shadow — gives the bar visual weight.
+    std::string shadow_row;
+    for (int i = 0; i < w; ++i) shadow_row += "\u2591";
+    draw(y + 1, x, shadow_row, shadow);
+}
+
 int draw_wrapped(int y, int x, int w, const std::string& text, Attr a, int gap) {
     // Preserve explicit newlines. Wrap remaining text.
     int cur_y = y;
@@ -157,6 +177,8 @@ long long ms_since(Clock::time_point t) {
     auto d = Clock::now() - t;
     return std::chrono::duration_cast<std::chrono::milliseconds>(d).count();
 }
+
+void sleep_ms(int ms) { napms(ms); }
 
 void beep_error() { beep(); }
 void flash() { flash(); }

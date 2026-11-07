@@ -2,11 +2,10 @@
 #include "screens.hpp"
 #include "ui.hpp"
 #include <ncurses.h>
+#include <algorithm>
 #include <string>
 #include <vector>
 
-// Layer names and their accent colors — used here and elsewhere.
-// Exposed in screens.hpp.
 namespace screens {
     const char* layer_name(int layer) {
         static const char* names[] = {
@@ -20,13 +19,13 @@ namespace screens {
 
     ui::Color layer_accent(int layer) {
         switch (layer) {
-            case 1: return ui::ACCENT;       // warm gold
-            case 2: return ui::INFO;         // marble cyan
-            case 3: return ui::ACCENT;       // bronze
-            case 4: return ui::SAFE;         // river teal-ish (green in ncurses)
-            case 5: return ui::DANGER;       // war red
-            case 6: return ui::HIGHLIGHT;    // thread violet
-            case 7: return ui::WARNING;      // dusk gold
+            case 1: return ui::ACCENT;
+            case 2: return ui::INFO;
+            case 3: return ui::ACCENT;
+            case 4: return ui::SAFE;
+            case 5: return ui::DANGER;
+            case 6: return ui::HIGHLIGHT;
+            case 7: return ui::WARNING;
             default:return ui::DEFAULT;
         }
     }
@@ -39,103 +38,95 @@ void GameApp::frame_menu() {
     const int R = ui::rows();
     const int C = ui::cols();
     const int w = std::min(64, C - 4);
-    const int h = std::min(18, R - 2);
+    const int h = std::min(22, R - 2);
     const int y = (R - h) / 2;
     const int x = (C - w) / 2;
 
     ui::draw_box(y, x, h, w, " ACHILLES \u00B7 THE LOOM OF FATE ", {ui::BORDER});
-    ui::draw_center(y + 2, "kleos   deaths   runs", {ui::DIM});
-    ui::draw_center(y + 3,
-        std::to_string(ctx_.Meta().kleos) + "        " +
-        std::to_string(ctx_.Meta().total_deaths) + "        " +
-        std::to_string(ctx_.Meta().total_runs),
-        {ui::ACCENT, true});
+
+    ui::draw_center(y + 2, "kleos", {ui::DIM});
+    ui::draw_center(y + 3, std::to_string(ctx_.Meta().kleos), {ui::ACCENT, true});
+    ui::draw_center(y + 5, "deaths   " + std::to_string(ctx_.Meta().total_deaths),
+                    {ui::DIM});
+    ui::draw_center(y + 6, "runs     " + std::to_string(ctx_.Meta().total_runs),
+                    {ui::DIM});
 
     struct Item { std::string label; int key; };
     std::vector<Item> items;
-
     if (ctx_.HasRun()) {
-        items.push_back({"Continue run \u2014 Layer " +
+        items.push_back({"CONTINUE RUN \u2014 LAYER " +
                           std::to_string(ctx_.CurrentLayer()), '1'});
-        items.push_back({"Abandon and start new run", '2'});
+        items.push_back({"ABANDON AND START NEW", '2'});
     } else {
-        items.push_back({"New run", '1'});
+        items.push_back({"NEW RUN", '1'});
     }
-    items.push_back({"Enter the Loom", '3'});
-    items.push_back({"Quit", '4'});
+    items.push_back({"ENTER THE LOOM", '3'});
+    items.push_back({"QUIT", '4'});
 
-    int row = y + 6;
+    int row = y + 9;
     for (const auto& it : items) {
         std::string line = "[" + std::string(1, (char)it.key) + "]  " + it.label;
-        ui::draw(row, x + 4, line, {ui::INFO, true});
+        ui::draw_center(row, line, {ui::INFO, true});
         row += 2;
     }
 
-    ui::draw(y + h - 1, x + 2, " press a number ", {ui::DIM});
+    ui::draw_center(y + h - 2, "press a number to choose   \u00B7   [?] help",
+                    {ui::DIM});
 
     int k = ui::get_key_ms(200);
     if (k == '1') {
-        if (ctx_.HasRun()) { state_ = AppState::LayerIntro; return; }
+        if (ctx_.HasRun()) { transition_to(AppState::LayerIntro); return; }
         ctx_.NewRun();
-        state_ = AppState::RunStart;
+        transition_to(AppState::RunStart);
         return;
     }
     if (k == '2' && ctx_.HasRun()) {
         ctx_.EndRun();
         ctx_.NewRun();
-        state_ = AppState::RunStart;
+        transition_to(AppState::RunStart);
         return;
     }
-    if (k == '3') { state_ = AppState::Loom; return; }
-    if (k == '4') { state_ = AppState::Quit; return; }
+    if (k == '3') { transition_to(AppState::Loom); return; }
+    if (k == '4') { transition_to(AppState::Quit); return; }
+    if (k == '?') { return_to_ = AppState::Menu; transition_to(AppState::Manual); return; }
 }
 
 // ====================================================================
-// RUN START (the myth quote)
+// RUN START
 // ====================================================================
 void GameApp::frame_run_start() {
     const int R = ui::rows();
-
-    static auto opened_at = ui::now();
-    static bool first = true;
-    if (first) { opened_at = ui::now(); first = false; }
-
-    long long elapsed = ui::ms_since(opened_at);
+    const int C = ui::cols();
+    long long elapsed = ui::ms_since(state_entered_at_);
 
     if (elapsed < 1200) {
         ui::draw_center(R / 2 - 3, "\u00B7 \u00B7 \u00B7", {ui::DIM});
     } else {
-        ui::draw_center(R / 2 - 3, "THE THREAD BEGINS", {ui::ACCENT, true});
-        ui::draw_center(R / 2 - 1, "The Fates have woven again.",
-                        {ui::INFO});
-        ui::draw_wrapped(R / 2 + 2, (ui::cols() - 56) / 2, 56,
-            "You have chosen the short, bright thread. Very well. "
-            "We will weave it \u2014 again and again \u2014 until you "
-            "understand what you have chosen.",
+        ui::draw_center(R / 2 - 5, "THE THREAD BEGINS", {ui::ACCENT, true});
+        int w = std::min(60, C - 10);
+        ui::draw_wrapped(R / 2 - 2, (C - w) / 2, w,
+            "You stand before the Loom. The three sisters watch.\n\n"
+            "One speaks: \"You have chosen the short, bright thread. "
+            "Very well. We will weave it \u2014 again and again \u2014 "
+            "until you understand what you have chosen.\"",
             {ui::DEFAULT});
     }
 
-    ui::draw_center(R - 3, "press ENTER to walk to Phthia.", {ui::DIM, true});
+    ui::draw_center(R - 4, "press ENTER to walk to Phthia", {ui::DIM, true});
 
     int k = ui::get_key_ms(16);
     if (k == '\n' || k == '\r' || k == KEY_ENTER) {
-        first = true;
-        state_ = AppState::LayerIntro;
+        transition_to(AppState::LayerIntro);
     }
 }
 
 // ====================================================================
-// LAYER INTRO (the card before every layer)
+// LAYER INTRO
 // ====================================================================
 void GameApp::frame_layer_intro() {
     const int R = ui::rows();
     const int C = ui::cols();
-
-    static auto opened_at = ui::now();
-    static bool first = true;
-    if (first) { opened_at = ui::now(); first = false; }
-
-    long long elapsed = ui::ms_since(opened_at);
+    long long elapsed = ui::ms_since(state_entered_at_);
 
     int layer = ctx_.CurrentLayer();
     const char* name = screens::layer_name(layer);
@@ -146,14 +137,11 @@ void GameApp::frame_layer_intro() {
     } else {
         std::string title = std::string("LAYER ") +
                              std::to_string(layer) + " \u2014 " + name;
-        ui::draw_center(R / 2 - 2, title, {accent, true});
-        // \u2500 = "─" = UTF-8 bytes: E2 94 80
-std::string underline;
-underline.reserve(title.size() * 3);
-for (size_t i = 0; i < title.size(); ++i) underline += "\u2500";  // string literal, not char
-ui::draw_center(R / 2 - 1, underline, {accent});
+        ui::draw_center(R / 2 - 3, title, {accent, true});
+        std::string underline;
+        for (size_t i = 0; i < title.size(); ++i) underline += "\u2500";
+        ui::draw_center(R / 2 - 2, underline, {accent});
 
-        // Short per-layer flavor line (kept minimal in Step 2C; Step 3 enriches).
         static const char* flavor[] = {
             "",
             "the training grounds \u2014 the boy becomes the weapon",
@@ -165,16 +153,14 @@ ui::draw_center(R / 2 - 1, underline, {accent});
             "the gate at dusk \u2014 paris's arrow finds its mark",
         };
         if (layer >= 1 && layer <= 7) {
-            ui::draw_center(R / 2 + 1, flavor[layer], {ui::INFO});
+            ui::draw_center(R / 2, flavor[layer], {ui::INFO});
         }
     }
 
-    ui::draw_center(R - 3, "press ENTER to proceed.", {ui::DIM, true});
+    ui::draw_center(R - 4, "press ENTER to proceed", {ui::DIM, true});
 
     int k = ui::get_key_ms(16);
     if (k == '\n' || k == '\r' || k == KEY_ENTER) {
-        first = true;
-        // Dispatch: Layer 1 goes to a phantom encounter; other layers currently stub.
         start_encounter_for_layer();
     }
 }

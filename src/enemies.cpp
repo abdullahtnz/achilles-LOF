@@ -8,27 +8,27 @@ Combatant make_l1_phantom(int index) {
         case 0:
             c.name = "Sparring Phantom";
             c.attacks = {
-                {"Straight thrust",       6,  false, true,  900},
-                {"Overhead cut",          8,  false, true,  900},
-                {"Heel tap (warning)",    0,  true,  true,  1300}, // very slow, very forgiving
+                {"Straight thrust", "lunging",           6,  false, true, 1800},
+                {"Overhead cut",    "raising its arm",  8,  false, true, 1800},
+                {"Heel tap",        "lowering its point", 0, true,  true, 2000},
             };
             break;
         case 1:
             c.name = "Phantom Hoplite";
             c.attacks = {
-                {"Shield bash",           9,  false, true,  850},
-                {"Spear sweep",           7,  false, true,  850},
-                {"Heel jab",              0,  true,  true,  1100},
-                {"Overhead cut",          10, false, true,  850},
+                {"Shield bash",  "surging forward", 9,  false, true, 1600},
+                {"Spear sweep",  "sweeping low",    7,  false, true, 1600},
+                {"Heel jab",     "drawing back",    0,  true,  true, 1800},
+                {"Overhead cut", "raising high",    10, false, true, 1600},
             };
             break;
         default:
             c.name = "Old Tutor's Shade";
             c.attacks = {
-                {"Feint",                 6,  false, true,  800},
-                {"Quarterstaff sweep",    8,  false, true,  800},
-                {"Heel-seeking low cut",  0,  true,  false, 800}, // NOT telegraphed
-                {"Overhead smash",        10, false, true,  800},
+                {"Feint",                "shifting weight",   6,  false, true,  1500},
+                {"Quarterstaff sweep",   "spinning",          8,  false, true,  1500},
+                {"Heel-seeking low cut", "moving strangely",  0,  true,  false, 1400},
+                {"Overhead smash",       "winding up",        10, false, true,  1500},
             };
             break;
     }
@@ -41,11 +41,11 @@ Combatant make_l1_chiron() {
     c.hp_max = 180;
     c.hp     = c.hp_max;
     c.attacks = {
-        {"Bow sweep",             10, false, true, 900},
-        {"Hoof kick",             12, false, true, 900},
-        {"Heel strike",            0, true,  true, 1200},  // long coil = tutorial
-        {"Staff cross",           10, false, true, 900},
-        {"Heel strike",            0, true,  true, 1100},
+        {"Bow sweep",  "drawing the bow",     10, false, true, 1800},
+        {"Hoof kick",  "rearing",             12, false, true, 1800},
+        {"Heel strike","coiling to strike low",0, true,  true, 2200},
+        {"Staff cross","crossing the staff",  10, false, true, 1800},
+        {"Heel strike","coiling to strike low",0, true,  true, 2000},
     };
     return c;
 }

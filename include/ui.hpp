@@ -50,6 +50,9 @@ void draw_box(int y, int x, int h, int w, const std::string& label = "",
 void draw_bar(int y, int x, int w, double pct, Attr fill_attr,
               Attr empty_attr = {DIM});
 
+void draw_big_bar(int y, int x, int w, double pct, Attr fill_attr,
+                  Attr shadow_attr = {DIM});
+
 // Multi-line word-wrapped block; returns lines printed.
 int draw_wrapped(int y, int x, int w, const std::string& text,
                  Attr a = {}, int line_gap = 0);
@@ -65,6 +68,7 @@ int get_key_ms(int ms);
 using Clock = std::chrono::steady_clock;
 Clock::time_point now();
 long long ms_since(Clock::time_point t);
+void sleep_ms(int ms);
 
 // ---------- Extras ----------
 void beep_error();       // terminal bell
