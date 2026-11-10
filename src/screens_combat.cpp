@@ -3,6 +3,7 @@
 #include "screens.hpp"
 #include "tutorial.hpp"
 #include "ui.hpp"
+#include "dialogue.hpp"
 #include <ncurses.h>
 #include <string>
 
@@ -328,12 +329,39 @@ void GameApp::frame_combat() {
         run.run_kleos += earned;
         ctx_.PersistRun();
 
-        if (outcome == CombatOutcome::PlayerWon) {
+                if (outcome == CombatOutcome::PlayerWon) {
             bool was_boss =
                 e.name.find("Chiron")   != std::string::npos ||
                 e.name.find("Deidamia") != std::string::npos ||
                 e.name.find("Vanguard") != std::string::npos;
+            int layer = ctx_.CurrentLayer();
+            int enc   = ctx_.Run().encounter;
             combat_.reset();
+
+            // Route to next dialogue scene, chapter-aware.
+            if (layer == 1) {
+                if (was_boss) {
+                    // Beat Chiron → outro scene
+                    ctx_.MutableRun().encounter = 3;
+                    ctx_.PersistRun();
+                    begin_scene("ch1_outro");
+                } else if (enc == 0) {
+                    ctx_.MutableRun().encounter = 1;
+                    ctx_.PersistRun();
+                    begin_scene("ch1_mid_1");
+                } else if (enc == 1) {
+                    ctx_.MutableRun().encounter = 2;
+                    ctx_.PersistRun();
+                    begin_scene("ch1_mid_2");
+                } else {
+                    ctx_.MutableRun().encounter = 3;
+                    ctx_.PersistRun();
+                    begin_scene("ch1_pre_boss");
+                }
+                return;
+            }
+
+            // Layers 2+ — keep existing behavior for now (Step 4 will add chapter 2/3 scenes)
             if (was_boss) {
                 ctx_.AdvanceLayer();
                 int new_layer = ctx_.CurrentLayer();

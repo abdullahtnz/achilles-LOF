@@ -171,6 +171,7 @@ CMakeFiles/achilles.dir/src/game_app.cpp.o: \
  /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/set \
  /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h \
+ /home/abdullahtnz/Desktop/Achilles-LOF/include/dialogue.hpp \
  /home/abdullahtnz/Desktop/Achilles-LOF/third_party/json/json.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
@@ -253,5 +254,6 @@ CMakeFiles/achilles.dir/src/game_app.cpp.o: \
  /home/abdullahtnz/Desktop/Achilles-LOF/include/save_manager.hpp \
  /home/abdullahtnz/Desktop/Achilles-LOF/include/ui.hpp \
  /home/abdullahtnz/Desktop/Achilles-LOF/include/screens.hpp \
+ /home/abdullahtnz/Desktop/Achilles-LOF/include/story.hpp \
  /usr/include/curses.h /usr/include/ncurses_dll.h /usr/include/unctrl.h \
  /usr/include/curses.h

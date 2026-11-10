@@ -1,11 +1,16 @@
 #include "game_app.hpp"
+#include "dialogue.hpp"
 #include "screens.hpp"
+#include "story.hpp"
 #include "ui.hpp"
 #include <ncurses.h>
 #include <memory>
 #include <string>
 
-GameApp::GameApp() = default;
+GameApp::GameApp() {
+    // Validate story registry at startup
+    (void)story::scene_count();
+}
 
 int GameApp::Run() {
     last_frame_ = ui::now();
@@ -27,6 +32,7 @@ int GameApp::Run() {
             case AppState::Menu:       frame_menu();        break;
             case AppState::RunStart:   frame_run_start();   break;
             case AppState::LayerIntro: frame_layer_intro(); break;
+            case AppState::Dialogue:   frame_dialogue();    break;
             case AppState::Combat:     frame_combat();      break;
             case AppState::BoonChoice: frame_boon_choice(); break;
             case AppState::Death:      frame_death();       break;
@@ -46,7 +52,6 @@ int GameApp::Run() {
 }
 
 void GameApp::transition_to(AppState next) {
-    // A short fade — improves the feel of switching screens.
     ui::fade_out(180);
     state_ = next;
     state_entered_at_ = ui::now();
@@ -61,6 +66,103 @@ void GameApp::mark_hint_shown(const std::string& key) {
     auto meta = ctx_.Meta();
     meta.fates_flags[key] = 1;
     ctx_.Saves().SaveMeta(meta);
+}
+
+// ----------------------------------------------------------------
+// Dialogue
+// ----------------------------------------------------------------
+
+void GameApp::begin_scene(const std::string& scene_id) {
+    const Scene* scene = find_scene(scene_id);
+    if (!scene) {
+        // Fallback: unknown scene → menu. Story data validation.
+        transition_to(AppState::Menu);
+        return;
+    }
+    auto& run = ctx_.MutableRun();
+    run.dialogue.scene_id       = scene_id;
+    run.dialogue.line_index     = 0;
+    run.dialogue.pending_choice = false;
+    // Don't clear choice_path — that's the historical record.
+    ctx_.PersistRun();
+    transition_to(AppState::Dialogue);
+}
+
+void GameApp::dialogue_advance() {
+    auto& run = ctx_.MutableRun();
+    const Scene* scene = find_scene(run.dialogue.scene_id);
+    if (!scene) { transition_to(AppState::Menu); return; }
+
+    if (run.dialogue.pending_choice) return;   // handled by choice keys
+
+    if (!advance_line(run.dialogue, *scene)) {
+        // Scene ended
+        if (scene->choices.empty()) {
+            if (!scene->next_scene_id.empty()) {
+                begin_scene(scene->next_scene_id);
+            } else {
+                dialogue_exit();
+            }
+            return;
+        }
+        // Choices pending — nothing more to do, waiting on player
+    }
+    ctx_.PersistRun();
+}
+
+void GameApp::dialogue_choose(int index) {
+    auto& run = ctx_.MutableRun();
+    const Scene* scene = find_scene(run.dialogue.scene_id);
+    if (!scene) return;
+    if (index < 0 || index >= (int)scene->choices.size()) return;
+
+    std::string next = apply_choice(run.dialogue, *scene, index);
+    ctx_.PersistRun();
+    if (next.empty()) {
+        dialogue_exit();
+    } else {
+        begin_scene(next);
+    }
+}
+
+void GameApp::dialogue_exit() {
+    auto& run = ctx_.MutableRun();
+    const std::string& scene_id = run.dialogue.scene_id;
+
+    // Combat-prefixed scenes: start the actual combat.
+    if (scene_id == "ch1_combat_1") {
+        run.encounter = 0;
+        ctx_.PersistRun();
+        start_encounter_for_layer();
+        return;
+    }
+    if (scene_id == "ch1_combat_2") {
+        run.encounter = 1;
+        ctx_.PersistRun();
+        start_encounter_for_layer();
+        return;
+    }
+    if (scene_id == "ch1_combat_3") {
+        run.encounter = 2;
+        ctx_.PersistRun();
+        start_encounter_for_layer();
+        return;
+    }
+    if (scene_id == "ch1_pre_boss") {
+        run.encounter = 3;
+        ctx_.PersistRun();
+        start_encounter_for_layer();
+        return;
+    }
+    if (scene_id == "ch1_outro") {
+        // Chapter 1 complete. Advance to Layer 2 (Skyros).
+        ctx_.AdvanceLayer();
+        transition_to(ctx_.HasRun() ? AppState::LayerIntro : AppState::Menu);
+        return;
+    }
+
+    // Default: intro/mid scenes → fall through to LayerIntro.
+    transition_to(AppState::LayerIntro);
 }
 
 // ----------------------------------------------------------------

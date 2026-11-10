@@ -15,6 +15,7 @@ enum class AppState {
     Menu,
     RunStart,
     LayerIntro,
+    Dialogue,
     Combat,
     BoonChoice,
     Death,
@@ -42,18 +43,25 @@ private:
 
     bool boon_pending_ = false;
     bool paused_       = false;
+    bool death_shook_  = false;
 
     std::string god_ally_;
 
-    // Hint tracking — persisted in meta.fates_flags
     bool hint_shown(const std::string& key);
     void mark_hint_shown(const std::string& key);
+
+    // Dialogue
+    void begin_scene(const std::string& scene_id);
+    void dialogue_advance();
+    void dialogue_choose(int index);
+    void dialogue_exit();
 
     void frame_boot();
     void frame_tutorial();
     void frame_menu();
     void frame_run_start();
     void frame_layer_intro();
+    void frame_dialogue();
     void frame_combat();
     void frame_boon_choice();
     void frame_death();

@@ -209,10 +209,52 @@ CMakeFiles/achilles.dir/src/tutorial.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/tutorial.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/tutorial.cpp -o CMakeFiles/achilles.dir/src/tutorial.cpp.s
 
+CMakeFiles/achilles.dir/src/dialogue.cpp.o: CMakeFiles/achilles.dir/flags.make
+CMakeFiles/achilles.dir/src/dialogue.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/dialogue.cpp
+CMakeFiles/achilles.dir/src/dialogue.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/achilles.dir/src/dialogue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/dialogue.cpp.o -MF CMakeFiles/achilles.dir/src/dialogue.cpp.o.d -o CMakeFiles/achilles.dir/src/dialogue.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/dialogue.cpp
+
+CMakeFiles/achilles.dir/src/dialogue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/achilles.dir/src/dialogue.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/abdullahtnz/Desktop/Achilles-LOF/src/dialogue.cpp > CMakeFiles/achilles.dir/src/dialogue.cpp.i
+
+CMakeFiles/achilles.dir/src/dialogue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/dialogue.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/dialogue.cpp -o CMakeFiles/achilles.dir/src/dialogue.cpp.s
+
+CMakeFiles/achilles.dir/src/story.cpp.o: CMakeFiles/achilles.dir/flags.make
+CMakeFiles/achilles.dir/src/story.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/story.cpp
+CMakeFiles/achilles.dir/src/story.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/achilles.dir/src/story.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/story.cpp.o -MF CMakeFiles/achilles.dir/src/story.cpp.o.d -o CMakeFiles/achilles.dir/src/story.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/story.cpp
+
+CMakeFiles/achilles.dir/src/story.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/achilles.dir/src/story.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/abdullahtnz/Desktop/Achilles-LOF/src/story.cpp > CMakeFiles/achilles.dir/src/story.cpp.i
+
+CMakeFiles/achilles.dir/src/story.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/story.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/story.cpp -o CMakeFiles/achilles.dir/src/story.cpp.s
+
+CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o: CMakeFiles/achilles.dir/flags.make
+CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/story/ch1_phthia.cpp
+CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o -MF CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o.d -o CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/story/ch1_phthia.cpp
+
+CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/abdullahtnz/Desktop/Achilles-LOF/src/story/ch1_phthia.cpp > CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.i
+
+CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/story/ch1_phthia.cpp -o CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.s
+
 CMakeFiles/achilles.dir/src/screens_run.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_run.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_run.cpp
 CMakeFiles/achilles.dir/src/screens_run.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/achilles.dir/src/screens_run.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/achilles.dir/src/screens_run.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_run.cpp.o -MF CMakeFiles/achilles.dir/src/screens_run.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_run.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_run.cpp
 
 CMakeFiles/achilles.dir/src/screens_run.cpp.i: cmake_force
@@ -226,7 +268,7 @@ CMakeFiles/achilles.dir/src/screens_run.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_combat.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_combat.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_combat.cpp
 CMakeFiles/achilles.dir/src/screens_combat.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/achilles.dir/src/screens_combat.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/achilles.dir/src/screens_combat.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_combat.cpp.o -MF CMakeFiles/achilles.dir/src/screens_combat.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_combat.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_combat.cpp
 
 CMakeFiles/achilles.dir/src/screens_combat.cpp.i: cmake_force
@@ -240,7 +282,7 @@ CMakeFiles/achilles.dir/src/screens_combat.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_loom.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_loom.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_loom.cpp
 CMakeFiles/achilles.dir/src/screens_loom.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/achilles.dir/src/screens_loom.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/achilles.dir/src/screens_loom.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_loom.cpp.o -MF CMakeFiles/achilles.dir/src/screens_loom.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_loom.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_loom.cpp
 
 CMakeFiles/achilles.dir/src/screens_loom.cpp.i: cmake_force
@@ -254,7 +296,7 @@ CMakeFiles/achilles.dir/src/screens_loom.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_death.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_death.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_death.cpp
 CMakeFiles/achilles.dir/src/screens_death.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/achilles.dir/src/screens_death.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/achilles.dir/src/screens_death.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_death.cpp.o -MF CMakeFiles/achilles.dir/src/screens_death.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_death.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_death.cpp
 
 CMakeFiles/achilles.dir/src/screens_death.cpp.i: cmake_force
@@ -268,7 +310,7 @@ CMakeFiles/achilles.dir/src/screens_death.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_boon.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_boon.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_boon.cpp
 CMakeFiles/achilles.dir/src/screens_boon.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/achilles.dir/src/screens_boon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/achilles.dir/src/screens_boon.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_boon.cpp.o -MF CMakeFiles/achilles.dir/src/screens_boon.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_boon.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_boon.cpp
 
 CMakeFiles/achilles.dir/src/screens_boon.cpp.i: cmake_force
@@ -282,7 +324,7 @@ CMakeFiles/achilles.dir/src/screens_boon.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_boot.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_boot.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_boot.cpp
 CMakeFiles/achilles.dir/src/screens_boot.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/achilles.dir/src/screens_boot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/achilles.dir/src/screens_boot.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_boot.cpp.o -MF CMakeFiles/achilles.dir/src/screens_boot.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_boot.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_boot.cpp
 
 CMakeFiles/achilles.dir/src/screens_boot.cpp.i: cmake_force
@@ -296,7 +338,7 @@ CMakeFiles/achilles.dir/src/screens_boot.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_help.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_help.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_help.cpp
 CMakeFiles/achilles.dir/src/screens_help.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/achilles.dir/src/screens_help.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/achilles.dir/src/screens_help.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_help.cpp.o -MF CMakeFiles/achilles.dir/src/screens_help.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_help.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_help.cpp
 
 CMakeFiles/achilles.dir/src/screens_help.cpp.i: cmake_force
@@ -310,7 +352,7 @@ CMakeFiles/achilles.dir/src/screens_help.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_tutorial.cpp
 CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o -MF CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_tutorial.cpp
 
 CMakeFiles/achilles.dir/src/screens_tutorial.cpp.i: cmake_force
@@ -324,7 +366,7 @@ CMakeFiles/achilles.dir/src/screens_tutorial.cpp.s: cmake_force
 CMakeFiles/achilles.dir/src/screens_manual.cpp.o: CMakeFiles/achilles.dir/flags.make
 CMakeFiles/achilles.dir/src/screens_manual.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_manual.cpp
 CMakeFiles/achilles.dir/src/screens_manual.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/achilles.dir/src/screens_manual.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/achilles.dir/src/screens_manual.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_manual.cpp.o -MF CMakeFiles/achilles.dir/src/screens_manual.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_manual.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_manual.cpp
 
 CMakeFiles/achilles.dir/src/screens_manual.cpp.i: cmake_force
@@ -334,6 +376,20 @@ CMakeFiles/achilles.dir/src/screens_manual.cpp.i: cmake_force
 CMakeFiles/achilles.dir/src/screens_manual.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/screens_manual.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_manual.cpp -o CMakeFiles/achilles.dir/src/screens_manual.cpp.s
+
+CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o: CMakeFiles/achilles.dir/flags.make
+CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o: /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_dialogue.cpp
+CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o: CMakeFiles/achilles.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o -MF CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o.d -o CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o -c /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_dialogue.cpp
+
+CMakeFiles/achilles.dir/src/screens_dialogue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/achilles.dir/src/screens_dialogue.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_dialogue.cpp > CMakeFiles/achilles.dir/src/screens_dialogue.cpp.i
+
+CMakeFiles/achilles.dir/src/screens_dialogue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/achilles.dir/src/screens_dialogue.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/abdullahtnz/Desktop/Achilles-LOF/src/screens_dialogue.cpp -o CMakeFiles/achilles.dir/src/screens_dialogue.cpp.s
 
 # Object files for target achilles
 achilles_OBJECTS = \
@@ -347,6 +403,9 @@ achilles_OBJECTS = \
 "CMakeFiles/achilles.dir/src/enemies_l2.cpp.o" \
 "CMakeFiles/achilles.dir/src/enemies_l3.cpp.o" \
 "CMakeFiles/achilles.dir/src/tutorial.cpp.o" \
+"CMakeFiles/achilles.dir/src/dialogue.cpp.o" \
+"CMakeFiles/achilles.dir/src/story.cpp.o" \
+"CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o" \
 "CMakeFiles/achilles.dir/src/screens_run.cpp.o" \
 "CMakeFiles/achilles.dir/src/screens_combat.cpp.o" \
 "CMakeFiles/achilles.dir/src/screens_loom.cpp.o" \
@@ -355,7 +414,8 @@ achilles_OBJECTS = \
 "CMakeFiles/achilles.dir/src/screens_boot.cpp.o" \
 "CMakeFiles/achilles.dir/src/screens_help.cpp.o" \
 "CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o" \
-"CMakeFiles/achilles.dir/src/screens_manual.cpp.o"
+"CMakeFiles/achilles.dir/src/screens_manual.cpp.o" \
+"CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o"
 
 # External object files for target achilles
 achilles_EXTERNAL_OBJECTS =
@@ -370,6 +430,9 @@ achilles: CMakeFiles/achilles.dir/src/enemies.cpp.o
 achilles: CMakeFiles/achilles.dir/src/enemies_l2.cpp.o
 achilles: CMakeFiles/achilles.dir/src/enemies_l3.cpp.o
 achilles: CMakeFiles/achilles.dir/src/tutorial.cpp.o
+achilles: CMakeFiles/achilles.dir/src/dialogue.cpp.o
+achilles: CMakeFiles/achilles.dir/src/story.cpp.o
+achilles: CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_run.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_combat.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_loom.cpp.o
@@ -379,11 +442,12 @@ achilles: CMakeFiles/achilles.dir/src/screens_boot.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_help.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o
 achilles: CMakeFiles/achilles.dir/src/screens_manual.cpp.o
+achilles: CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o
 achilles: CMakeFiles/achilles.dir/build.make
 achilles: /usr/local/lib/libstark.so
 achilles: /usr/lib/x86_64-linux-gnu/libncursesw.so
 achilles: CMakeFiles/achilles.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable achilles"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/abdullahtnz/Desktop/Achilles-LOF/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable achilles"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/achilles.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

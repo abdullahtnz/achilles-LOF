@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/combat.cpp" "CMakeFiles/achilles.dir/src/combat.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/combat.cpp.o.d"
+  "/home/abdullahtnz/Desktop/Achilles-LOF/src/dialogue.cpp" "CMakeFiles/achilles.dir/src/dialogue.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/dialogue.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/enemies.cpp" "CMakeFiles/achilles.dir/src/enemies.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/enemies.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/enemies_l2.cpp" "CMakeFiles/achilles.dir/src/enemies_l2.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/enemies_l2.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/enemies_l3.cpp" "CMakeFiles/achilles.dir/src/enemies_l3.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/enemies_l3.cpp.o.d"
@@ -20,11 +21,14 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_boot.cpp" "CMakeFiles/achilles.dir/src/screens_boot.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_boot.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_combat.cpp" "CMakeFiles/achilles.dir/src/screens_combat.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_combat.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_death.cpp" "CMakeFiles/achilles.dir/src/screens_death.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_death.cpp.o.d"
+  "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_dialogue.cpp" "CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_help.cpp" "CMakeFiles/achilles.dir/src/screens_help.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_help.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_loom.cpp" "CMakeFiles/achilles.dir/src/screens_loom.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_loom.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_manual.cpp" "CMakeFiles/achilles.dir/src/screens_manual.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_manual.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_run.cpp" "CMakeFiles/achilles.dir/src/screens_run.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_run.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/screens_tutorial.cpp" "CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/screens_tutorial.cpp.o.d"
+  "/home/abdullahtnz/Desktop/Achilles-LOF/src/story.cpp" "CMakeFiles/achilles.dir/src/story.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/story.cpp.o.d"
+  "/home/abdullahtnz/Desktop/Achilles-LOF/src/story/ch1_phthia.cpp" "CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/tutorial.cpp" "CMakeFiles/achilles.dir/src/tutorial.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/tutorial.cpp.o.d"
   "/home/abdullahtnz/Desktop/Achilles-LOF/src/ui.cpp" "CMakeFiles/achilles.dir/src/ui.cpp.o" "gcc" "CMakeFiles/achilles.dir/src/ui.cpp.o.d"
   )

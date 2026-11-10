@@ -153,6 +153,30 @@ src/combat.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/combat.cpp.s
 .PHONY : src/combat.cpp.s
 
+src/dialogue.o: src/dialogue.cpp.o
+.PHONY : src/dialogue.o
+
+# target to build an object file
+src/dialogue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/dialogue.cpp.o
+.PHONY : src/dialogue.cpp.o
+
+src/dialogue.i: src/dialogue.cpp.i
+.PHONY : src/dialogue.i
+
+# target to preprocess a source file
+src/dialogue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/dialogue.cpp.i
+.PHONY : src/dialogue.cpp.i
+
+src/dialogue.s: src/dialogue.cpp.s
+.PHONY : src/dialogue.s
+
+# target to generate assembly for a file
+src/dialogue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/dialogue.cpp.s
+.PHONY : src/dialogue.cpp.s
+
 src/enemies.o: src/enemies.cpp.o
 .PHONY : src/enemies.o
 
@@ -417,6 +441,30 @@ src/screens_death.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_death.cpp.s
 .PHONY : src/screens_death.cpp.s
 
+src/screens_dialogue.o: src/screens_dialogue.cpp.o
+.PHONY : src/screens_dialogue.o
+
+# target to build an object file
+src/screens_dialogue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_dialogue.cpp.o
+.PHONY : src/screens_dialogue.cpp.o
+
+src/screens_dialogue.i: src/screens_dialogue.cpp.i
+.PHONY : src/screens_dialogue.i
+
+# target to preprocess a source file
+src/screens_dialogue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_dialogue.cpp.i
+.PHONY : src/screens_dialogue.cpp.i
+
+src/screens_dialogue.s: src/screens_dialogue.cpp.s
+.PHONY : src/screens_dialogue.s
+
+# target to generate assembly for a file
+src/screens_dialogue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_dialogue.cpp.s
+.PHONY : src/screens_dialogue.cpp.s
+
 src/screens_help.o: src/screens_help.cpp.o
 .PHONY : src/screens_help.o
 
@@ -537,6 +585,54 @@ src/screens_tutorial.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_tutorial.cpp.s
 .PHONY : src/screens_tutorial.cpp.s
 
+src/story.o: src/story.cpp.o
+.PHONY : src/story.o
+
+# target to build an object file
+src/story.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story.cpp.o
+.PHONY : src/story.cpp.o
+
+src/story.i: src/story.cpp.i
+.PHONY : src/story.i
+
+# target to preprocess a source file
+src/story.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story.cpp.i
+.PHONY : src/story.cpp.i
+
+src/story.s: src/story.cpp.s
+.PHONY : src/story.s
+
+# target to generate assembly for a file
+src/story.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story.cpp.s
+.PHONY : src/story.cpp.s
+
+src/story/ch1_phthia.o: src/story/ch1_phthia.cpp.o
+.PHONY : src/story/ch1_phthia.o
+
+# target to build an object file
+src/story/ch1_phthia.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.o
+.PHONY : src/story/ch1_phthia.cpp.o
+
+src/story/ch1_phthia.i: src/story/ch1_phthia.cpp.i
+.PHONY : src/story/ch1_phthia.i
+
+# target to preprocess a source file
+src/story/ch1_phthia.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.i
+.PHONY : src/story/ch1_phthia.cpp.i
+
+src/story/ch1_phthia.s: src/story/ch1_phthia.cpp.s
+.PHONY : src/story/ch1_phthia.s
+
+# target to generate assembly for a file
+src/story/ch1_phthia.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.s
+.PHONY : src/story/ch1_phthia.cpp.s
+
 src/tutorial.o: src/tutorial.cpp.o
 .PHONY : src/tutorial.o
 
@@ -597,6 +693,9 @@ help:
 	@echo "... src/combat.o"
 	@echo "... src/combat.i"
 	@echo "... src/combat.s"
+	@echo "... src/dialogue.o"
+	@echo "... src/dialogue.i"
+	@echo "... src/dialogue.s"
 	@echo "... src/enemies.o"
 	@echo "... src/enemies.i"
 	@echo "... src/enemies.s"
@@ -630,6 +729,9 @@ help:
 	@echo "... src/screens_death.o"
 	@echo "... src/screens_death.i"
 	@echo "... src/screens_death.s"
+	@echo "... src/screens_dialogue.o"
+	@echo "... src/screens_dialogue.i"
+	@echo "... src/screens_dialogue.s"
 	@echo "... src/screens_help.o"
 	@echo "... src/screens_help.i"
 	@echo "... src/screens_help.s"
@@ -645,6 +747,12 @@ help:
 	@echo "... src/screens_tutorial.o"
 	@echo "... src/screens_tutorial.i"
 	@echo "... src/screens_tutorial.s"
+	@echo "... src/story.o"
+	@echo "... src/story.i"
+	@echo "... src/story.s"
+	@echo "... src/story/ch1_phthia.o"
+	@echo "... src/story/ch1_phthia.i"
+	@echo "... src/story/ch1_phthia.s"
 	@echo "... src/tutorial.o"
 	@echo "... src/tutorial.i"
 	@echo "... src/tutorial.s"

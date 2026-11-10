@@ -4,15 +4,13 @@
 #include <set>
 #include <string>
 #include <vector>
+#include "dialogue.hpp"
 #include "json.hpp"
 
-// ----- Save version (bump when MetaState/RunState schema changes) -----
-inline constexpr int SAVE_VERSION = 2;
+inline constexpr int SAVE_VERSION = 3;
 
-// ----- Which ending the player has seen -----
 enum class Ending { None, A_Kleos, B_Phantom, C_True };
 
-// ----- Persistent meta-progression (survives every run) -----
 struct MetaState {
     int         save_version        = SAVE_VERSION;
     uint64_t    kleos               = 0;
@@ -27,24 +25,28 @@ struct MetaState {
     bool        first_launch_seen    = false;
 };
 
-// ----- Per-run state (cleared after each run) -----
 struct RunState {
     int         layer                    = 1;
     int         encounter                = 0;
-    std::string path;                              // "ares" | "athena" | ""
+    std::string path;
     std::vector<std::string> boons;
     bool        patroclus_alive          = false;
     bool        patroclus_dead_this_run  = false;
+    bool        patroclus_saved          = false;    // NEW (v3)
     bool        boon_chosen              = false;
     int         heel_hits_taken          = 0;
     int         rage                     = 0;
     uint32_t    run_kleos                = 0;
     std::set<std::string> fragments_this_run;
+
+    // v3: dialogue progression
+    std::string      chapter_id;         // e.g. "chapter_1_phthia"
+    DialogueState    dialogue;           // current scene + line
+    std::string      checkpoint_scene;   // scene to restore on death
 };
 
-// ----- Settings -----
 struct Settings {
-    bool        first_launch_done = false;
+    bool first_launch_done = false;
 };
 
 // ----- JSON serialization -----
@@ -78,6 +80,22 @@ inline void from_json(const nlohmann::json& j, MetaState& m) {
     m.first_launch_seen     = j.value("first_launch_seen", false);
 }
 
+inline void to_json(nlohmann::json& j, const DialogueState& d) {
+    j = nlohmann::json{
+        {"scene_id", d.scene_id},
+        {"line_index", d.line_index},
+        {"choice_path", d.choice_path},
+        {"pending_choice", d.pending_choice},
+    };
+}
+
+inline void from_json(const nlohmann::json& j, DialogueState& d) {
+    d.scene_id       = j.value("scene_id", std::string{});
+    d.line_index     = j.value("line_index", 0);
+    d.choice_path    = j.value("choice_path", std::vector<int>{});
+    d.pending_choice = j.value("pending_choice", false);
+}
+
 inline void to_json(nlohmann::json& j, const RunState& r) {
     j = nlohmann::json{
         {"layer", r.layer},
@@ -86,11 +104,15 @@ inline void to_json(nlohmann::json& j, const RunState& r) {
         {"boons", r.boons},
         {"patroclus_alive", r.patroclus_alive},
         {"patroclus_dead_this_run", r.patroclus_dead_this_run},
+        {"patroclus_saved", r.patroclus_saved},
         {"boon_chosen", r.boon_chosen},
         {"heel_hits_taken", r.heel_hits_taken},
         {"rage", r.rage},
         {"run_kleos", r.run_kleos},
         {"fragments_this_run", r.fragments_this_run},
+        {"chapter_id", r.chapter_id},
+        {"dialogue", r.dialogue},
+        {"checkpoint_scene", r.checkpoint_scene},
     };
 }
 
@@ -101,11 +123,15 @@ inline void from_json(const nlohmann::json& j, RunState& r) {
     r.boons                   = j.value("boons", std::vector<std::string>{});
     r.patroclus_alive         = j.value("patroclus_alive", false);
     r.patroclus_dead_this_run = j.value("patroclus_dead_this_run", false);
+    r.patroclus_saved         = j.value("patroclus_saved", false);
     r.boon_chosen             = j.value("boon_chosen", false);
     r.heel_hits_taken         = j.value("heel_hits_taken", 0);
     r.rage                    = j.value("rage", 0);
     r.run_kleos               = j.value("run_kleos", 0u);
     r.fragments_this_run      = j.value("fragments_this_run", std::set<std::string>{});
+    r.chapter_id              = j.value("chapter_id", std::string{});
+    r.dialogue                = j.value("dialogue", DialogueState{});
+    r.checkpoint_scene        = j.value("checkpoint_scene", std::string{});
 }
 
 inline void to_json(nlohmann::json& j, const Settings& s) {

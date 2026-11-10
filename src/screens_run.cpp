@@ -114,9 +114,14 @@ void GameApp::frame_run_start() {
 
     ui::draw_center(R - 4, "press ENTER to walk to Phthia", {ui::DIM, true});
 
-    int k = ui::get_key_ms(16);
+        int k = ui::get_key_ms(16);
     if (k == '\n' || k == '\r' || k == KEY_ENTER) {
-        transition_to(AppState::LayerIntro);
+        // NEW: begin the chapter intro dialogue before LayerIntro.
+        auto& run = ctx_.MutableRun();
+        run.chapter_id = "chapter_1_phthia";
+        run.checkpoint_scene = "ch1_intro_thetis";
+        ctx_.PersistRun();
+        begin_scene("ch1_birth");
     }
 }
 

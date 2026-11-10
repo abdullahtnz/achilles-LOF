@@ -32,7 +32,10 @@ add_executable(achilles
     src/enemies.cpp
     src/enemies_l2.cpp
     src/enemies_l3.cpp
-    src/tutorial.cpp                # NEW
+    src/tutorial.cpp
+    src/dialogue.cpp                 # NEW
+    src/story.cpp                    # NEW
+    src/story/ch1_phthia.cpp         # NEW
     src/screens_run.cpp
     src/screens_combat.cpp
     src/screens_loom.cpp
@@ -40,8 +43,9 @@ add_executable(achilles
     src/screens_boon.cpp
     src/screens_boot.cpp
     src/screens_help.cpp
-    src/screens_tutorial.cpp        # NEW
-    src/screens_manual.cpp          # NEW
+    src/screens_tutorial.cpp
+    src/screens_manual.cpp
+    src/screens_dialogue.cpp         # NEW
 )
 
 target_include_directories(achilles PRIVATE
