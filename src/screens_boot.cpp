@@ -33,7 +33,11 @@ void GameApp::frame_boot() {
     }
 
     if (elapsed > 2200) {
-        ui::draw_center(R - 4, "[ press any key ]", {ui::DIM, true});
+        // Gentle pulsing prompt
+        bool visible = ((elapsed / 600) % 2) == 0;
+        if (visible) {
+            ui::draw_center(R - 4, "[ press any key ]", {ui::DIM, true});
+        }
     }
 
     int k = ui::get_key_ms(16);

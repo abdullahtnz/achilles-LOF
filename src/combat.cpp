@@ -67,14 +67,12 @@ bool CombatSession::action_unlocked(PlayerAction a) const {
 // -------------------------------------------------------------
 
 long long CombatSession::adjusted_coil_ms(int base_coil_ms) const {
-    // Consecutive attacks speed the enemy's next coil up.
     int penalty = consecutive_attacks_ * 150;
     long long result = base_coil_ms - penalty;
     return std::max(400LL, result);
 }
 
 long long CombatSession::current_dodge_window_ms() const {
-    // Base window shrinks with consecutive attacks (spam punishes timing).
     long long base = (player_.name.find("Athena") != std::string::npos) ? 600 : 400;
     long long penalty = (consecutive_attacks_ - 1) * 80;
     if (penalty < 0) penalty = 0;
@@ -101,7 +99,6 @@ void CombatSession::begin_pre_coil() {
     phase_elapsed_ms_ = 0;
     attack_active_ = false;
 
-    // Pick the next attack, precompute its coil time.
     if (enemy_.attacks.empty()) {
         pending_coil_ms_ = 0;
         return;
@@ -136,12 +133,12 @@ long long CombatSession::CoilRemainingMs() const {
 
 long long CombatSession::CoilTotalMs() const { return pending_coil_ms_; }
 
-bool CombatSession::InIdlePhase() const     { return phase_ == Phase::Idle; }
+bool CombatSession::InIdlePhase() const { return phase_ == Phase::Idle; }
 long long CombatSession::IdleRemainingMs() const {
     if (phase_ != Phase::Idle) return 0;
     return std::max(0LL, POST_ATTACK_IDLE_MS - phase_elapsed_ms_);
 }
-bool CombatSession::InPreCoilPhase() const  { return phase_ == Phase::PreCoil; }
+bool CombatSession::InPreCoilPhase() const { return phase_ == Phase::PreCoil; }
 long long CombatSession::PreCoilRemainingMs() const {
     if (phase_ != Phase::PreCoil) return 0;
     return std::max(0LL, PRE_HEEL_COIL_MS - phase_elapsed_ms_);
@@ -273,6 +270,12 @@ void CombatSession::resolve_enemy_attack() {
             last_event_ = "The heel is struck.";
             outcome_ = CombatOutcome::PlayerHeelHit;
             attack_active_ = false;
+
+            // Log the heel hit
+            if (!last_event_.empty()) {
+                event_log_.push_back(last_event_);
+                if (event_log_.size() > 3) event_log_.erase(event_log_.begin());
+            }
             return;
         }
         int dmg = a.hp_damage;
@@ -280,7 +283,7 @@ void CombatSession::resolve_enemy_attack() {
         if (player_.stance == Stance::Defensive)  dmg = (int)(dmg * 0.7);
         if (intervention_.god == "ares" && intervention_.turns_left > 0)
             dmg = (int)(dmg * 1.5);
-        if (player_.rage > 40) dmg += 2;   // rage penalty
+        if (player_.rage > 40) dmg += 2;
 
         player_.hp -= dmg;
         just_hit_ = true;
@@ -288,6 +291,10 @@ void CombatSession::resolve_enemy_attack() {
         if (player_.hp <= 0) {
             outcome_ = CombatOutcome::PlayerDied;
             attack_active_ = false;
+            if (!last_event_.empty()) {
+                event_log_.push_back(last_event_);
+                if (event_log_.size() > 3) event_log_.erase(event_log_.begin());
+            }
             return;
         }
     }
@@ -299,6 +306,15 @@ void CombatSession::resolve_enemy_attack() {
 
     apply_behavior_on_enemy_hit();
     maybe_patroclus_support();
+
+    // Log the event
+    if (!last_event_.empty()) {
+        if (event_log_.empty() || event_log_.back() != last_event_) {
+            event_log_.push_back(last_event_);
+            if (event_log_.size() > 3) event_log_.erase(event_log_.begin());
+        }
+    }
+
     advance_to_next_attack();
 }
 
@@ -306,8 +322,6 @@ void CombatSession::advance_to_next_attack() {
     attack_active_ = false;
     current_attack_index_++;
 
-    // Decay consecutive attacks naturally — after a full turn cycle without
-    // attacking, spam penalty resets partially.
     if (last_player_action_ != PlayerAction::Attack &&
         last_player_action_ != PlayerAction::Reckless) {
         reset_consecutive_attacks();
@@ -472,5 +486,14 @@ bool CombatSession::submit(PlayerAction action) {
     }
 
     apply_behavior_on_player_action(action);
+
+    // Log the event
+    if (!last_event_.empty()) {
+        if (event_log_.empty() || event_log_.back() != last_event_) {
+            event_log_.push_back(last_event_);
+            if (event_log_.size() > 3) event_log_.erase(event_log_.begin());
+        }
+    }
+
     return true;
 }

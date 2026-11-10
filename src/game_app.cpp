@@ -46,8 +46,11 @@ int GameApp::Run() {
 }
 
 void GameApp::transition_to(AppState next) {
+    // A short fade — improves the feel of switching screens.
+    ui::fade_out(180);
     state_ = next;
     state_entered_at_ = ui::now();
+    ui::fade_in(180);
 }
 
 bool GameApp::hint_shown(const std::string& key) {

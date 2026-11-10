@@ -104,7 +104,8 @@ public:
     bool             JustHitEnemy()   const { return just_hit_enemy_; }
     bool             JustGuardUsed()  const { return just_guard_used_; }
 
-    std::string      LastEvent() const { return last_event_; }
+    std::string LastEvent() const { return last_event_; }
+    const std::vector<std::string>& EventLog() const { return event_log_; }   // NEW
     const GodIntervention& Intervention() const { return intervention_; }
     std::string      EnemySpeech() const;    // current speech line ("" if none)
 
@@ -144,6 +145,7 @@ private:
     bool      just_hit_enemy_  = false;
     bool      just_guard_used_ = false;
     std::string last_event_;
+        std::vector<std::string> event_log_;    // last 3 events, most recent last
 
     long long since_player_action_ms_ = 0;
     long long player_action_cooldown_ms_ = 150;

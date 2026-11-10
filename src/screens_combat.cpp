@@ -153,8 +153,18 @@ void GameApp::frame_combat() {
                         attr_color(ui::HIGHLIGHT, true));
     }
 
-    // Event line + Patroclus
-    ui::draw_center(R - 9, combat_->LastEvent(), attr_color(ui::INFO));
+        // Event log — last 3 events, most recent first
+    {
+        const auto& log = combat_->EventLog();
+        int base_row = R - 10;
+        int n = (int)log.size();
+        for (int i = 0; i < n && i < 3; ++i) {
+            const std::string& ev = log[n - 1 - i];
+            ui::Attr a = (i == 0) ? attr_color(ui::INFO, true)
+                                  : attr_color(ui::DIM);
+            ui::draw_center(base_row + i, ev, a);
+        }
+    }
     if (combat_->Companion().active) {
         std::string patline = combat_->Companion().alive
                               ? "Patroclus at your shoulder."
