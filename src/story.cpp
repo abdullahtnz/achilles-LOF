@@ -1,11 +1,14 @@
 #include "story.hpp"
 #include <vector>
 
-// Forward-declare chapter providers.
 namespace story {
     std::vector<Scene> chapter_1_scenes();
-    // std::vector<Scene> chapter_2_scenes();   // Step 4
-    // std::vector<Scene> chapter_3_scenes();   // Step 4
+    std::vector<Scene> chapter_2_scenes();
+    std::vector<Scene> chapter_3_scenes();
+    std::vector<Scene> chapter_4_scenes();
+    std::vector<Scene> chapter_5_scenes();
+    std::vector<Scene> chapter_6_scenes();
+    std::vector<Scene> chapter_7_scenes();
 }
 
 namespace {
@@ -17,6 +20,12 @@ struct Registry {
             for (auto& s : v) all.push_back(std::move(s));
         };
         add(story::chapter_1_scenes());
+        add(story::chapter_2_scenes());
+        add(story::chapter_3_scenes());
+        add(story::chapter_4_scenes());
+        add(story::chapter_5_scenes());
+        add(story::chapter_6_scenes());
+        add(story::chapter_7_scenes());
     }
 };
 

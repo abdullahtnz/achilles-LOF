@@ -19,6 +19,7 @@ enum class AppState {
     Combat,
     BoonChoice,
     Death,
+    Ending,
     Loom,
     Manual,
     Pause,
@@ -56,6 +57,13 @@ private:
     void dialogue_choose(int index);
     void dialogue_exit();
 
+    // Scene-id helpers shared by routing / resume.
+    bool is_combat_scene(const std::string& id, int& layer, int& encounter) const;
+    bool is_outro_scene(const std::string& id, int& chapter) const;
+    std::string arrival_scene_for(int layer) const;
+    std::string boss_outro_scene_for(int layer) const;
+    void grant_scene_fragment(const std::string& id);
+
     void frame_boot();
     void frame_tutorial();
     void frame_menu();
@@ -65,6 +73,7 @@ private:
     void frame_combat();
     void frame_boon_choice();
     void frame_death();
+    void frame_ending();
     void frame_loom();
     void frame_manual();
     void frame_pause();

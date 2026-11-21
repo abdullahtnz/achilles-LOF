@@ -49,3 +49,12 @@ Combatant make_l1_chiron() {
     };
     return c;
 }
+bool is_boss_name(const std::string& name) {
+    return name == "Chiron, the Centaur" ||
+           name == "Deidamia's Grief" ||
+           name == "Hector's Vanguard" ||
+           name == "Scamander, the River God" ||
+           name == "Hector, Prince of Troy" ||
+           name == "The Moirai" ||
+           name == "Apollo's Chosen";
+}

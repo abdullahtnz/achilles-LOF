@@ -22,6 +22,12 @@ public:
     void IncrementDeaths();                    // persists (also patroclus counter)
     void MarkEnding(Ending e);                 // records ending string; persists
     void AddFragment(const std::string& id);   // set insert; persists
+    bool AllFragmentsCollected() const;
+    void SetFlag(const std::string& key, int value);          // persists
+    bool SpendKleos(uint32_t amount);                         // false if insufficient
+    void UnlockWeapon(const std::string& weapon);             // persists
+    void AddThetisToken(int count = 1);                       // persists
+    void CompleteRun(Ending e);               // award kleos, record ending, clear run
 
     // ----- Current run -----
     const RunState& Run() const;               // throws if none

@@ -23,17 +23,17 @@ CombatSession::CombatSession(Combatant p, Combatant e, Patroclus pat)
 
 CombatSession::CombatSession(Combatant p, Combatant e, Patroclus pat,
                              const std::string& god_ally)
-    : player_(std::move(p)), enemy_(std::move(e)), pat_(pat) {
+    : player_(std::move(p)), enemy_(std::move(e)), pat_(pat), path_(god_ally) {
     enemy_hp_ = enemy_.hp;
     if (god_ally == "ares") {
         intervention_.god = "ares";
-        intervention_.message = "Ares whispers: no more dodging. Only blood.";
-        intervention_.turns_left = 5;
+        intervention_.message = "Ares burns in your blood. Strike. Strike again.";
+        intervention_.turns_left = 1;
         intervention_.triggered = true;
     } else if (god_ally == "athena") {
         intervention_.god = "athena";
-        intervention_.message = "Athena steadies your hand. Three strikes cannot miss.";
-        intervention_.turns_left = 3;
+        intervention_.message = "Athena steadies your hand. Read the blow before it falls.";
+        intervention_.turns_left = 1;
         intervention_.triggered = true;
     }
     begin_pre_coil();
@@ -73,7 +73,7 @@ long long CombatSession::adjusted_coil_ms(int base_coil_ms) const {
 }
 
 long long CombatSession::current_dodge_window_ms() const {
-    long long base = (player_.name.find("Athena") != std::string::npos) ? 600 : 400;
+    long long base = (path_ == "athena") ? 750 : 500;
     long long penalty = (consecutive_attacks_ - 1) * 80;
     if (penalty < 0) penalty = 0;
     long long result = base - penalty;
@@ -172,10 +172,21 @@ double CombatSession::stance_heel_mult() const {
     return 1.0;
 }
 
+double CombatSession::weapon_damage_mult() const {
+    const std::string& w = player_.weapon;
+    if (w == "sword")   return 1.15;
+    if (w == "shield")  return 1.05;
+    if (w == "chariot") return 1.30;
+    if (w == "bow")     return 1.10;
+    return 1.0;   // spear
+}
+
 int CombatSession::effective_player_damage(int base) {
-    double dmg = base * stance_damage_mult();
-    if (intervention_.god == "ares" && intervention_.turns_left > 0)
-        dmg *= 1.5;
+    double dmg = base * stance_damage_mult() * weapon_damage_mult();
+    // Ares rewards aggression: an extra half again while in Aggressive stance.
+    if (path_ == "ares" && player_.stance == Stance::Aggressive) dmg *= 1.5;
+    // Athena trades raw force for precision and safety.
+    if (path_ == "athena") dmg *= 0.75;
     return (int)dmg;
 }
 
@@ -231,9 +242,17 @@ void CombatSession::tick(long long dt_ms) {
 void CombatSession::resolve_enemy_attack() {
     const Attack& a = CurrentAttack();
 
-    bool dodge_disabled = (intervention_.god == "ares" && intervention_.turns_left > 0);
-
     bool negate = false;
+
+    auto read_focus = [&]() {
+        // Athena's focus reads two incoming attacks; others read one.
+        if (focus_charges_ > 0) {
+            focus_charges_--;
+            if (focus_charges_ == 0) player_.focused = false;
+        } else {
+            player_.focused = false;
+        }
+    };
 
     if (a.is_heel) {
         if (player_.stance == Stance::Defensive) {
@@ -241,9 +260,9 @@ void CombatSession::resolve_enemy_attack() {
             last_event_ = "You brace \u2014 the heel is safe.";
         } else if (player_.focused) {
             negate = true;
-            player_.focused = false;
+            read_focus();
             last_event_ = "You focus \u2014 the blow slips past.";
-        } else if (dodge_pending_ && !dodge_disabled) {
+        } else if (dodge_pending_) {
             negate = true;
             just_dodged_ = true;
             last_event_ = "You slip aside.";
@@ -254,12 +273,12 @@ void CombatSession::resolve_enemy_attack() {
             last_event_ = "Thetis's hand is on you. The heel holds.";
         }
     } else {
-        if (dodge_pending_ && !dodge_disabled) {
+        if (dodge_pending_) {
             just_dodged_ = true;
             last_event_ = "You slip aside.";
             negate = true;
         } else if (player_.focused) {
-            player_.focused = false;
+            read_focus();
             last_event_ = "You focus \u2014 the blow is read.";
             negate = true;
         }
@@ -281,8 +300,6 @@ void CombatSession::resolve_enemy_attack() {
         int dmg = a.hp_damage;
         if (player_.stance == Stance::Aggressive) dmg = (int)(dmg * 1.2);
         if (player_.stance == Stance::Defensive)  dmg = (int)(dmg * 0.7);
-        if (intervention_.god == "ares" && intervention_.turns_left > 0)
-            dmg = (int)(dmg * 1.5);
         if (player_.rage > 40) dmg += 2;
 
         player_.hp -= dmg;
@@ -421,6 +438,7 @@ bool CombatSession::submit(PlayerAction action) {
             player_.hp -= 20;
             int dmg = 12 + std::rand() % 7;
             dmg = effective_player_damage(dmg) * 3;
+            if (path_ == "ares") dmg = (int)(dmg * 1.5);
             enemy_hp_ -= dmg;
             just_hit_enemy_ = true;
             last_event_ = "RECKLESS \u2014 " + std::to_string(dmg) +
@@ -436,8 +454,11 @@ bool CombatSession::submit(PlayerAction action) {
             if (player_.stamina < 1) { last_event_ = "Not enough stamina to focus."; return false; }
             player_.stamina -= 1;
             player_.focused = true;
+            focus_charges_ = (path_ == "athena") ? 2 : 1;
             player_.combo = 0;
-            last_event_ = "You breathe. The next blow will be read.";
+            last_event_ = (path_ == "athena")
+                ? "You breathe. Two blows will be read."
+                : "You breathe. The next blow will be read.";
             reset_consecutive_attacks();
             break;
         }

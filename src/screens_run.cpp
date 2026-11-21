@@ -1,4 +1,5 @@
 #include "game_app.hpp"
+#include "dialogue.hpp"
 #include "screens.hpp"
 #include "ui.hpp"
 #include <ncurses.h>
@@ -50,6 +51,10 @@ void GameApp::frame_menu() {
                     {ui::DIM});
     ui::draw_center(y + 6, "runs     " + std::to_string(ctx_.Meta().total_runs),
                     {ui::DIM});
+    ui::draw_center(y + 7,
+        "fragments " + std::to_string((int)ctx_.Meta().fragments_collected.size()) +
+        "/" + std::to_string(FRAGMENT_TOTAL),
+        {ui::DIM});
 
     struct Item { std::string label; int key; };
     std::vector<Item> items;
@@ -62,6 +67,12 @@ void GameApp::frame_menu() {
     }
     items.push_back({"ENTER THE LOOM", '3'});
     items.push_back({"QUIT", '4'});
+    if (ctx_.Meta().fates_flags.count("hard_mode_unlocked") > 0) {
+        bool on = ctx_.Meta().fates_flags.count("hard_mode_active") > 0 &&
+                  ctx_.Meta().fates_flags.at("hard_mode_active") > 0;
+        items.push_back({std::string("THE NAMELESS THREAD — HARD MODE: ") +
+                         (on ? "ON" : "OFF"), '5'});
+    }
 
     int row = y + 9;
     for (const auto& it : items) {
@@ -75,7 +86,31 @@ void GameApp::frame_menu() {
 
     int k = ui::get_key_ms(200);
     if (k == '1') {
-        if (ctx_.HasRun()) { transition_to(AppState::LayerIntro); return; }
+        if (ctx_.HasRun()) {
+            const auto& run = ctx_.Run();
+            if (run.in_combat) {
+                transition_to(AppState::LayerIntro);
+            } else if (!run.boon_chosen && run.layer == 3 &&
+                       run.chapter_id == "chapter_2") {
+                transition_to(AppState::BoonChoice);
+            } else if (!run.dialogue.scene_id.empty() &&
+                       find_scene(run.dialogue.scene_id)) {
+                // Resume the exact line / choice we left off at.
+                transition_to(AppState::Dialogue);
+            } else {
+                // Legacy save or a run that has no scene yet: start at the
+                // beginning of the chapter rather than skipping its story.
+                std::string opening = (run.layer == 1)
+                    ? "ch1_birth"
+                    : arrival_scene_for(run.layer);
+                if (find_scene(opening)) {
+                    begin_scene(opening);
+                } else {
+                    transition_to(AppState::LayerIntro);
+                }
+            }
+            return;
+        }
         ctx_.NewRun();
         transition_to(AppState::RunStart);
         return;
@@ -88,6 +123,13 @@ void GameApp::frame_menu() {
     }
     if (k == '3') { transition_to(AppState::Loom); return; }
     if (k == '4') { transition_to(AppState::Quit); return; }
+    if (k == '5' && ctx_.Meta().fates_flags.count("hard_mode_unlocked") > 0) {
+        int on = 0;
+        auto it = ctx_.Meta().fates_flags.find("hard_mode_active");
+        if (it != ctx_.Meta().fates_flags.end()) on = it->second;
+        ctx_.SetFlag("hard_mode_active", on ? 0 : 1);
+        return;
+    }
     if (k == '?') { return_to_ = AppState::Menu; transition_to(AppState::Manual); return; }
 }
 

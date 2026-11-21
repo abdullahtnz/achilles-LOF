@@ -7,7 +7,8 @@
 #include "dialogue.hpp"
 #include "json.hpp"
 
-inline constexpr int SAVE_VERSION = 3;
+inline constexpr int SAVE_VERSION = 4;
+inline constexpr int FRAGMENT_TOTAL = 6;
 
 enum class Ending { None, A_Kleos, B_Phantom, C_True };
 
@@ -34,9 +35,12 @@ struct RunState {
     bool        patroclus_dead_this_run  = false;
     bool        patroclus_saved          = false;    // NEW (v3)
     bool        boon_chosen              = false;
+    bool        in_combat                = false;    // v4: resume directly into a fight
     int         heel_hits_taken          = 0;
+    int         heel_guards              = 0;        // v4: Thetis tokens carried in-run
     int         rage                     = 0;
     uint32_t    run_kleos                = 0;
+    std::string weapon                   = "spear";  // v4: equipped weapon
     std::set<std::string> fragments_this_run;
 
     // v3: dialogue progression
@@ -106,9 +110,12 @@ inline void to_json(nlohmann::json& j, const RunState& r) {
         {"patroclus_dead_this_run", r.patroclus_dead_this_run},
         {"patroclus_saved", r.patroclus_saved},
         {"boon_chosen", r.boon_chosen},
+        {"in_combat", r.in_combat},
         {"heel_hits_taken", r.heel_hits_taken},
+        {"heel_guards", r.heel_guards},
         {"rage", r.rage},
         {"run_kleos", r.run_kleos},
+        {"weapon", r.weapon},
         {"fragments_this_run", r.fragments_this_run},
         {"chapter_id", r.chapter_id},
         {"dialogue", r.dialogue},
@@ -125,9 +132,12 @@ inline void from_json(const nlohmann::json& j, RunState& r) {
     r.patroclus_dead_this_run = j.value("patroclus_dead_this_run", false);
     r.patroclus_saved         = j.value("patroclus_saved", false);
     r.boon_chosen             = j.value("boon_chosen", false);
+    r.in_combat               = j.value("in_combat", false);
     r.heel_hits_taken         = j.value("heel_hits_taken", 0);
+    r.heel_guards             = j.value("heel_guards", 0);
     r.rage                    = j.value("rage", 0);
     r.run_kleos               = j.value("run_kleos", 0u);
+    r.weapon                  = j.value("weapon", std::string("spear"));
     r.fragments_this_run      = j.value("fragments_this_run", std::set<std::string>{});
     r.chapter_id              = j.value("chapter_id", std::string{});
     r.dialogue                = j.value("dialogue", DialogueState{});

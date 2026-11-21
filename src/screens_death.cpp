@@ -10,21 +10,10 @@ void GameApp::frame_death() {
     long long elapsed = ui::ms_since(state_entered_at_);
 
     // On entry: brief screen shake.
-    if (elapsed < 250 && elapsed > 20) {
-        // Screenshake is implemented via screen_shake(), which does an
-        // inverted flash. We only trigger it once per entry.
-        static bool shook = false;
-        if (!shook) {
-            ui::screen_shake(3, 1);
-            shook = true;
-        }
-    }
-    if (elapsed < 30) {
-        static bool reset_shook = false;
-        if (!reset_shook) {
-            // reset static shake flag from above
-            reset_shook = true;
-        }
+    if (elapsed < 16) death_shook_ = false;
+    if (elapsed < 250 && elapsed > 20 && !death_shook_) {
+        ui::screen_shake(3, 1);
+        death_shook_ = true;
     }
 
     // Fade in the death content
@@ -41,6 +30,10 @@ void GameApp::frame_death() {
         std::string line = "kleos " + std::to_string(ctx_.Meta().kleos) +
                            "    deaths " + std::to_string(ctx_.Meta().total_deaths);
         ui::draw_center(R - 6, line, {ui::ACCENT});
+        if (ctx_.LastEnding() == Ending::B_Phantom) {
+            ui::draw_center(R - 5, "the rage has made you into a phantom",
+                            {ui::DANGER, true});
+        }
         ui::draw_center(R - 3, "press ENTER to return to the loom.",
                         {ui::DIM, true});
     }

@@ -4,6 +4,8 @@
 #include "story.hpp"
 #include "ui.hpp"
 #include <ncurses.h>
+#include <algorithm>
+#include <cstdlib>
 #include <memory>
 #include <string>
 
@@ -36,6 +38,7 @@ int GameApp::Run() {
             case AppState::Combat:     frame_combat();      break;
             case AppState::BoonChoice: frame_boon_choice(); break;
             case AppState::Death:      frame_death();       break;
+            case AppState::Ending:     frame_ending();      break;
             case AppState::Loom:       frame_loom();        break;
             case AppState::Manual:     frame_manual();      break;
             case AppState::Pause:      frame_pause();       break;
@@ -63,9 +66,7 @@ bool GameApp::hint_shown(const std::string& key) {
 }
 
 void GameApp::mark_hint_shown(const std::string& key) {
-    auto meta = ctx_.Meta();
-    meta.fates_flags[key] = 1;
-    ctx_.Saves().SaveMeta(meta);
+    ctx_.SetFlag(key, 1);
 }
 
 // ----------------------------------------------------------------
@@ -84,8 +85,96 @@ void GameApp::begin_scene(const std::string& scene_id) {
     run.dialogue.line_index     = 0;
     run.dialogue.pending_choice = false;
     // Don't clear choice_path — that's the historical record.
+
+    // Chapter id tracks which story chapter the run is currently in.
+    if (scene_id.size() > 2 && scene_id[0] == 'c' && scene_id[1] == 'h') {
+        int n = std::atoi(scene_id.c_str() + 2);
+        if (n >= 1 && n <= 7) {
+            run.chapter_id = "chapter_" + std::to_string(n);
+        }
+    }
+
+    // Patroclus, if left behind, dies at Troy while you are at the wall.
+    if (scene_id == "ch5_arrival" && !run.patroclus_alive) {
+        run.patroclus_dead_this_run = true;
+    }
+
+    grant_scene_fragment(scene_id);
     ctx_.PersistRun();
     transition_to(AppState::Dialogue);
+}
+
+void GameApp::grant_scene_fragment(const std::string& id) {
+    struct Entry { const char* scene; const char* fragment; };
+    static const Entry entries[] = {
+        {"ch1_outro",    "frag_chiron"},
+        {"ch2_post_boss","frag_deidamia"},
+        {"ch3_outro",    "frag_patroclus"},
+        {"ch4_outro",    "frag_scamander"},
+        {"ch5_outro",    "frag_hector"},
+        {"ch6_outro",    "frag_moirai"},
+    };
+    for (const auto& e : entries) {
+        if (id == e.scene) {
+            auto& run = ctx_.MutableRun();
+            if (run.fragments_this_run.insert(e.fragment).second) {
+                ctx_.AddFragment(e.fragment);
+            }
+            return;
+        }
+    }
+}
+
+bool GameApp::is_combat_scene(const std::string& id, int& layer, int& encounter) const {
+    if (id.rfind("ch", 0) != 0) return false;
+    size_t us = id.find('_');
+    if (us == std::string::npos) return false;
+
+    int n = std::atoi(id.substr(2, us - 2).c_str());
+    if (n < 1 || n > 7) return false;
+    std::string rest = id.substr(us + 1);
+
+    if (rest == "pre_boss") {
+        layer = n;
+        encounter = 3;
+        return true;
+    }
+    if (rest.rfind("combat_", 0) == 0) {
+        int k = std::atoi(rest.c_str() + 7);
+        if (k >= 1 && k <= 3) {
+            layer = n;
+            encounter = k - 1;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool GameApp::is_outro_scene(const std::string& id, int& chapter) const {
+    if (id == "ch2_post_boss") {
+        chapter = 2;
+        return true;
+    }
+    if (id.rfind("ch", 0) != 0) return false;
+    size_t us = id.find('_');
+    if (us == std::string::npos) return false;
+    std::string rest = id.substr(us + 1);
+    if (rest != "outro") return false;
+    int n = std::atoi(id.substr(2, us - 2).c_str());
+    if (n < 1 || n > 7) return false;
+    chapter = n;
+    return true;
+}
+
+std::string GameApp::arrival_scene_for(int layer) const {
+    if (layer < 1 || layer > 7) return "";
+    return "ch" + std::to_string(layer) + "_arrival";
+}
+
+std::string GameApp::boss_outro_scene_for(int layer) const {
+    if (layer == 2) return "ch2_post_boss";
+    if (layer < 1 || layer > 7) return "";
+    return "ch" + std::to_string(layer) + "_outro";
 }
 
 void GameApp::dialogue_advance() {
@@ -116,6 +205,20 @@ void GameApp::dialogue_choose(int index) {
     if (!scene) return;
     if (index < 0 || index >= (int)scene->choices.size()) return;
 
+    // Story choices with mechanical consequences.
+    const std::string cur = run.dialogue.scene_id;
+    if (cur == "ch2_mid_1" && index == 0) {
+        // Odysseus's bronze token: one heel guard.
+        run.heel_guards += 1;
+    }
+    if (cur == "ch3_patroclus_intro") {
+        run.patroclus_alive = (index == 0);
+        if (index == 0) run.patroclus_saved = false;
+    }
+    if (cur == "ch3_mid_1") {
+        run.patroclus_saved = (index == 0);
+    }
+
     std::string next = apply_choice(run.dialogue, *scene, index);
     ctx_.PersistRun();
     if (next.empty()) {
@@ -127,41 +230,57 @@ void GameApp::dialogue_choose(int index) {
 
 void GameApp::dialogue_exit() {
     auto& run = ctx_.MutableRun();
-    const std::string& scene_id = run.dialogue.scene_id;
+    const std::string scene_id = run.dialogue.scene_id;
 
-    // Combat-prefixed scenes: start the actual combat.
-    if (scene_id == "ch1_combat_1") {
-        run.encounter = 0;
+    // Endings resolve the run.
+    if (scene_id == "ch7_end_a") {
+        ctx_.CompleteRun(Ending::A_Kleos);
+        transition_to(AppState::Ending);
+        return;
+    }
+    if (scene_id == "ch7_end_c") {
+        ctx_.CompleteRun(Ending::C_True);
+        transition_to(AppState::Ending);
+        return;
+    }
+
+    // Any combat scene: set the encounter and begin the fight.
+    int combat_layer = 0, encounter = 0;
+    if (is_combat_scene(scene_id, combat_layer, encounter)) {
+        run.layer = combat_layer;
+        run.encounter = encounter;
+        run.in_combat = true;
         ctx_.PersistRun();
         start_encounter_for_layer();
         return;
     }
-    if (scene_id == "ch1_combat_2") {
-        run.encounter = 1;
-        ctx_.PersistRun();
-        start_encounter_for_layer();
-        return;
-    }
-    if (scene_id == "ch1_combat_3") {
-        run.encounter = 2;
-        ctx_.PersistRun();
-        start_encounter_for_layer();
-        return;
-    }
-    if (scene_id == "ch1_pre_boss") {
-        run.encounter = 3;
-        ctx_.PersistRun();
-        start_encounter_for_layer();
-        return;
-    }
-    if (scene_id == "ch1_outro") {
-        // Chapter 1 complete. Advance to Layer 2 (Skyros).
+
+    // Chapter outro: advance the layer and begin the next chapter.
+    int chapter = 0;
+    if (is_outro_scene(scene_id, chapter)) {
+        if (chapter == 2) {
+            // Skyros ends at the god-choice screen.
+            ctx_.AdvanceLayer();
+            boon_pending_ = true;
+            transition_to(AppState::BoonChoice);
+            return;
+        }
         ctx_.AdvanceLayer();
-        transition_to(ctx_.HasRun() ? AppState::LayerIntro : AppState::Menu);
+        if (!ctx_.HasRun()) {
+            transition_to(AppState::Menu);
+            return;
+        }
+        int next_layer = ctx_.CurrentLayer();
+        std::string next_scene = arrival_scene_for(next_layer);
+        if (!next_scene.empty() && find_scene(next_scene)) {
+            begin_scene(next_scene);
+        } else {
+            transition_to(AppState::LayerIntro);
+        }
         return;
     }
 
-    // Default: intro/mid scenes → fall through to LayerIntro.
+    // Default: intro/mid scene with no follow-up → layer intro.
     transition_to(AppState::LayerIntro);
 }
 
@@ -170,95 +289,67 @@ void GameApp::dialogue_exit() {
 // ----------------------------------------------------------------
 
 void GameApp::start_combat_phantom(int index) {
-    Combatant player;
-    player.name        = "Achilles";
-    player.hp_max      = player.hp = 100;
-    player.stamina_max = 3;
-    player.stamina     = 3;
-
-    Combatant enemy = make_l1_phantom(index);
-    combat_ = std::make_unique<CombatSession>(
-        player, enemy, Patroclus{}, god_ally_);
-    combat_->set_unlocked_actions(1);
-    transition_to(AppState::Combat);
+    (void)index;
+    start_encounter_for_layer();
 }
 
 void GameApp::start_combat_chiron() {
-    Combatant player;
-    player.name        = "Achilles";
-    player.hp_max      = player.hp = 100;
-    player.stamina_max = 3;
-    player.stamina     = 3;
-
-    Combatant boss = make_l1_chiron();
-    combat_ = std::make_unique<CombatSession>(
-        player, boss, Patroclus{}, god_ally_);
-    combat_->set_unlocked_actions(1);
-    transition_to(AppState::Combat);
+    start_encounter_for_layer();
 }
 
 void GameApp::start_encounter_for_layer() {
     int layer = ctx_.CurrentLayer();
     int enc   = ctx_.Run().encounter;
-
     god_ally_ = ctx_.Run().path;
 
-    if (layer == 1) {
-        if (enc >= 3) start_combat_chiron();
-        else          start_combat_phantom(enc);
-        return;
-    }
-
-    if (layer == 2) {
+    auto make_player = [&]() {
         Combatant player;
-        player.name        = "Achilles";
+        player.name = (god_ally_ == "athena") ? "Achilles (Athena)" : "Achilles";
+        player.weapon      = ctx_.Run().weapon;
         player.hp_max      = player.hp = 100;
-        player.stamina_max = 3;
-        player.stamina     = 3;
-        if (enc >= 3) {
-            Combatant boss = make_l2_deidamia();
-            combat_ = std::make_unique<CombatSession>(
-                player, boss, Patroclus{}, god_ally_);
-        } else {
-            Combatant e = make_l2_illusion(enc);
-            combat_ = std::make_unique<CombatSession>(
-                player, e, Patroclus{}, god_ally_);
-        }
-        combat_->set_unlocked_actions(layer);
-        transition_to(AppState::Combat);
-        return;
-    }
+        player.stamina_max = 3 + (player.weapon == "shield" ? 1 : 0);
+        player.stamina     = player.stamina_max;
+        player.heel_guards = ctx_.Run().heel_guards;
+        return player;
+    };
 
-    if (layer == 3) {
-        Patroclus pat;
+    Patroclus pat;
+    if (layer >= 3) {
         pat.active       = true;
         pat.alive        = ctx_.Run().patroclus_alive &&
                            !ctx_.Run().patroclus_dead_this_run;
         pat.used_support = false;
-        Combatant player;
-        player.name        = (ctx_.Run().path == "athena")
-                              ? "Achilles (Athena)"
-                              : "Achilles";
-        player.hp_max      = player.hp = 100;
-        player.stamina_max = 3;
-        player.stamina     = 3;
-        if (enc >= 3) {
-            Combatant boss = make_l3_hector_vanguard();
-            combat_ = std::make_unique<CombatSession>(
-                player, boss, pat, god_ally_);
-        } else {
-            Combatant e = make_l3_trojan(enc);
-            combat_ = std::make_unique<CombatSession>(
-                player, e, pat, god_ally_);
-        }
-        combat_->set_unlocked_actions(layer);
-        transition_to(AppState::Combat);
-        return;
     }
 
-    // Layers 4-7 stubs
-    ctx_.MutableRun().run_kleos += 20;
+    Combatant player = make_player();
+    Combatant enemy;
+    switch (layer) {
+        case 1: enemy = (enc >= 3) ? make_l1_chiron()      : make_l1_phantom(enc); break;
+        case 2: enemy = (enc >= 3) ? make_l2_deidamia()    : make_l2_illusion(enc); break;
+        case 3: enemy = (enc >= 3) ? make_l3_hector_vanguard() : make_l3_trojan(enc); break;
+        case 4: enemy = (enc >= 3) ? make_l4_scamander()   : make_l4_river(enc); break;
+        case 5: enemy = (enc >= 3) ? make_l5_hector()      : make_l5_wall(enc); break;
+        case 6: enemy = (enc >= 3) ? make_l6_moirai()      : make_l6_phantom(enc); break;
+        case 7: enemy = (enc >= 3) ? make_l7_apollo_chosen(): make_l7_gate(enc); break;
+        default:
+            enemy = make_l1_phantom(enc);
+            break;
+    }
+
+    // The Nameless Thread: the loom's hard mode.
+    auto hm = ctx_.Meta().fates_flags.find("hard_mode_active");
+    if (hm != ctx_.Meta().fates_flags.end() && hm->second > 0) {
+        enemy.hp_max = (int)(enemy.hp_max * 1.3);
+        enemy.hp     = enemy.hp_max;
+        for (auto& atk : enemy.attacks) {
+            atk.coil_ms = std::max(900, atk.coil_ms - 150);
+        }
+    }
+
+    ctx_.MutableRun().in_combat = true;
     ctx_.PersistRun();
-    ctx_.AdvanceLayer();
-    transition_to(ctx_.HasRun() ? AppState::LayerIntro : AppState::Menu);
+
+    combat_ = std::make_unique<CombatSession>(player, enemy, pat, god_ally_);
+    combat_->set_unlocked_actions(layer);
+    transition_to(AppState::Combat);
 }

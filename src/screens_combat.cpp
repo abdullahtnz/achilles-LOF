@@ -124,12 +124,20 @@ void GameApp::frame_combat() {
                     std::to_string(ehp) + " / " + std::to_string(e.hp_max),
                     attr_color(ui::DANGER, true));
 
-    // Coil meter — 60 chars wide for readability
+    // Coil meter — 60 chars wide for readability. Turns green inside the
+    // dodge window so the timing is legible instead of guesswork.
     if (coiling) {
         int meter_w = std::min(60, box_w - 6);
         int meter_x = (C - meter_w) / 2;
+        bool dodge_now = remain <= combat_->current_dodge_window_ms() &&
+                         combat_->CurrentAttack().telegraphed;
         ui::draw_bar(name_y + 5, meter_x, meter_w, prog,
-                     attr_color(ui::DANGER, true), attr_color(ui::DIM));
+                     attr_color(dodge_now ? ui::SAFE : ui::DANGER, true),
+                     attr_color(ui::DIM));
+        if (dodge_now) {
+            ui::draw_center(name_y + 6, "\u2190 [D] NOW \u2192",
+                            attr_color(ui::SAFE, true));
+        }
     }
 
     // Behavior hint
@@ -182,7 +190,7 @@ void GameApp::frame_combat() {
     if (coiling && combat_->CurrentAttack().is_heel &&
         !hint_shown(tutorial::hint::HEEL_FIRST)) {
         ui::draw_center(R - 13,
-            "\u26A0  HEEL STRIKE \u2014 press [D] to dodge!  \u26A0",
+            "\u26A0  HEEL STRIKE \u2014 wait for the meter, then [D]!  \u26A0",
             attr_color(ui::DANGER, true));
         if (combat_->JustDodged() || combat_->JustHitPlayer() ||
             combat_->Outcome() == CombatOutcome::PlayerHeelHit) {
@@ -268,11 +276,13 @@ void GameApp::frame_combat() {
                              : attr_color(ui::DIM));
     }
 
-    if (p.heel_guards > 0) {
-        ui::draw(status_y + 1, 2,
-                 "HEEL GUARD: " + std::to_string(p.heel_guards) + " token" +
-                 (p.heel_guards == 1 ? "" : "s"),
-                 attr_color(ui::ACCENT, true));
+    {
+        std::string gear = "WEAPON: " + p.weapon;
+        if (p.heel_guards > 0) {
+            gear += "   HEEL GUARD: " + std::to_string(p.heel_guards) + " token" +
+                    (p.heel_guards == 1 ? "" : "s");
+        }
+        ui::draw(status_y + 1, 2, gear, attr_color(ui::ACCENT, true));
     }
 
     if (p.rage > 0) {
@@ -325,61 +335,57 @@ void GameApp::frame_combat() {
             case CombatOutcome::PlayerDied:     earned = 15; break;
             default: break;
         }
-        auto& run = ctx_.MutableRun();
-        run.run_kleos += earned;
-        ctx_.PersistRun();
 
-                if (outcome == CombatOutcome::PlayerWon) {
-            bool was_boss =
-                e.name.find("Chiron")   != std::string::npos ||
-                e.name.find("Deidamia") != std::string::npos ||
-                e.name.find("Vanguard") != std::string::npos;
+        // Fleeing is not death. Withdraw to the layer and try again.
+        if (outcome == CombatOutcome::PlayerFled) {
+            auto& run = ctx_.MutableRun();
+            run.in_combat = false;
+            run.heel_guards = combat_->Player().heel_guards;
+            run.rage = combat_->Player().rage;
+            ctx_.PersistRun();
+            combat_.reset();
+            transition_to(AppState::LayerIntro);
+            return;
+        }
+
+        if (outcome == CombatOutcome::PlayerWon) {
+            const bool was_boss = is_boss_name(e.name);
             int layer = ctx_.CurrentLayer();
             int enc   = ctx_.Run().encounter;
+            {
+                auto& run = ctx_.MutableRun();
+                run.run_kleos += earned;
+                run.in_combat = false;
+                run.heel_guards = combat_->Player().heel_guards;
+                run.rage = combat_->Player().rage;
+                ctx_.PersistRun();
+            }
             combat_.reset();
 
-            // Route to next dialogue scene, chapter-aware.
-            if (layer == 1) {
-                if (was_boss) {
-                    // Beat Chiron → outro scene
-                    ctx_.MutableRun().encounter = 3;
-                    ctx_.PersistRun();
-                    begin_scene("ch1_outro");
-                } else if (enc == 0) {
-                    ctx_.MutableRun().encounter = 1;
-                    ctx_.PersistRun();
-                    begin_scene("ch1_mid_1");
-                } else if (enc == 1) {
-                    ctx_.MutableRun().encounter = 2;
-                    ctx_.PersistRun();
-                    begin_scene("ch1_mid_2");
+            if (was_boss) {
+                if (layer == 7) {
+                    begin_scene(ctx_.AllFragmentsCollected()
+                                    ? "ch7_choice_true"
+                                    : "ch7_choice_false");
                 } else {
-                    ctx_.MutableRun().encounter = 3;
-                    ctx_.PersistRun();
-                    begin_scene("ch1_pre_boss");
+                    begin_scene(boss_outro_scene_for(layer));
                 }
                 return;
             }
 
-            // Layers 2+ — keep existing behavior for now (Step 4 will add chapter 2/3 scenes)
-            if (was_boss) {
-                ctx_.AdvanceLayer();
-                int new_layer = ctx_.CurrentLayer();
-                if (new_layer == 3 && !ctx_.Run().boon_chosen) {
-                    boon_pending_ = true;
-                    transition_to(AppState::BoonChoice);
-                } else {
-                    transition_to(ctx_.HasRun() ? AppState::LayerIntro
-                                                : AppState::Menu);
-                }
-            } else {
-                ctx_.MutableRun().encounter += 1;
-                ctx_.PersistRun();
-                start_encounter_for_layer();
-            }
+            std::string prefix = "ch" + std::to_string(layer);
+            if (enc == 0)      begin_scene(prefix + "_mid_1");
+            else if (enc == 1) begin_scene(prefix + "_mid_2");
+            else               begin_scene(prefix + "_pre_boss");
             return;
         }
 
+        // Heel hit / HP death.
+        {
+            auto& run = ctx_.MutableRun();
+            run.run_kleos += earned;
+            ctx_.PersistRun();
+        }
         combat_.reset();
         ctx_.OnHeelHit();
         transition_to(AppState::Death);

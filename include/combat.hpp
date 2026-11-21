@@ -33,6 +33,7 @@ struct Attack {
 
 struct Combatant {
     std::string name;
+    std::string weapon       = "spear";
     int         hp           = 100;
     int         hp_max       = 100;
     int         stamina      = 3;
@@ -129,6 +130,8 @@ private:
 
     bool      dodge_pending_ = false;
     long long dodge_window_ms_ = 400;
+    std::string path_;             // "ares" / "athena" / ""
+    int       focus_charges_ = 0;  // Athena: focus reads two attacks
 
     // ---- Pacing state (Step 1.5) ----
     enum class Phase { Idle, PreCoil, Coil };
@@ -167,6 +170,7 @@ private:
     int  effective_player_damage(int base);
     double stance_damage_mult() const;
     double stance_heel_mult() const;
+    double weapon_damage_mult() const;
 
     // Pacing helpers
     long long adjusted_coil_ms(int base_coil_ms) const;

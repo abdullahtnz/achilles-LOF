@@ -249,6 +249,102 @@ src/enemies_l3.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l3.cpp.s
 .PHONY : src/enemies_l3.cpp.s
 
+src/enemies_l4.o: src/enemies_l4.cpp.o
+.PHONY : src/enemies_l4.o
+
+# target to build an object file
+src/enemies_l4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l4.cpp.o
+.PHONY : src/enemies_l4.cpp.o
+
+src/enemies_l4.i: src/enemies_l4.cpp.i
+.PHONY : src/enemies_l4.i
+
+# target to preprocess a source file
+src/enemies_l4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l4.cpp.i
+.PHONY : src/enemies_l4.cpp.i
+
+src/enemies_l4.s: src/enemies_l4.cpp.s
+.PHONY : src/enemies_l4.s
+
+# target to generate assembly for a file
+src/enemies_l4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l4.cpp.s
+.PHONY : src/enemies_l4.cpp.s
+
+src/enemies_l5.o: src/enemies_l5.cpp.o
+.PHONY : src/enemies_l5.o
+
+# target to build an object file
+src/enemies_l5.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l5.cpp.o
+.PHONY : src/enemies_l5.cpp.o
+
+src/enemies_l5.i: src/enemies_l5.cpp.i
+.PHONY : src/enemies_l5.i
+
+# target to preprocess a source file
+src/enemies_l5.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l5.cpp.i
+.PHONY : src/enemies_l5.cpp.i
+
+src/enemies_l5.s: src/enemies_l5.cpp.s
+.PHONY : src/enemies_l5.s
+
+# target to generate assembly for a file
+src/enemies_l5.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l5.cpp.s
+.PHONY : src/enemies_l5.cpp.s
+
+src/enemies_l6.o: src/enemies_l6.cpp.o
+.PHONY : src/enemies_l6.o
+
+# target to build an object file
+src/enemies_l6.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l6.cpp.o
+.PHONY : src/enemies_l6.cpp.o
+
+src/enemies_l6.i: src/enemies_l6.cpp.i
+.PHONY : src/enemies_l6.i
+
+# target to preprocess a source file
+src/enemies_l6.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l6.cpp.i
+.PHONY : src/enemies_l6.cpp.i
+
+src/enemies_l6.s: src/enemies_l6.cpp.s
+.PHONY : src/enemies_l6.s
+
+# target to generate assembly for a file
+src/enemies_l6.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l6.cpp.s
+.PHONY : src/enemies_l6.cpp.s
+
+src/enemies_l7.o: src/enemies_l7.cpp.o
+.PHONY : src/enemies_l7.o
+
+# target to build an object file
+src/enemies_l7.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l7.cpp.o
+.PHONY : src/enemies_l7.cpp.o
+
+src/enemies_l7.i: src/enemies_l7.cpp.i
+.PHONY : src/enemies_l7.i
+
+# target to preprocess a source file
+src/enemies_l7.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l7.cpp.i
+.PHONY : src/enemies_l7.cpp.i
+
+src/enemies_l7.s: src/enemies_l7.cpp.s
+.PHONY : src/enemies_l7.s
+
+# target to generate assembly for a file
+src/enemies_l7.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/enemies_l7.cpp.s
+.PHONY : src/enemies_l7.cpp.s
+
 src/game_app.o: src/game_app.cpp.o
 .PHONY : src/game_app.o
 
@@ -465,6 +561,30 @@ src/screens_dialogue.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_dialogue.cpp.s
 .PHONY : src/screens_dialogue.cpp.s
 
+src/screens_ending.o: src/screens_ending.cpp.o
+.PHONY : src/screens_ending.o
+
+# target to build an object file
+src/screens_ending.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_ending.cpp.o
+.PHONY : src/screens_ending.cpp.o
+
+src/screens_ending.i: src/screens_ending.cpp.i
+.PHONY : src/screens_ending.i
+
+# target to preprocess a source file
+src/screens_ending.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_ending.cpp.i
+.PHONY : src/screens_ending.cpp.i
+
+src/screens_ending.s: src/screens_ending.cpp.s
+.PHONY : src/screens_ending.s
+
+# target to generate assembly for a file
+src/screens_ending.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/screens_ending.cpp.s
+.PHONY : src/screens_ending.cpp.s
+
 src/screens_help.o: src/screens_help.cpp.o
 .PHONY : src/screens_help.o
 
@@ -633,6 +753,150 @@ src/story/ch1_phthia.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch1_phthia.cpp.s
 .PHONY : src/story/ch1_phthia.cpp.s
 
+src/story/ch2_skyros.o: src/story/ch2_skyros.cpp.o
+.PHONY : src/story/ch2_skyros.o
+
+# target to build an object file
+src/story/ch2_skyros.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch2_skyros.cpp.o
+.PHONY : src/story/ch2_skyros.cpp.o
+
+src/story/ch2_skyros.i: src/story/ch2_skyros.cpp.i
+.PHONY : src/story/ch2_skyros.i
+
+# target to preprocess a source file
+src/story/ch2_skyros.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch2_skyros.cpp.i
+.PHONY : src/story/ch2_skyros.cpp.i
+
+src/story/ch2_skyros.s: src/story/ch2_skyros.cpp.s
+.PHONY : src/story/ch2_skyros.s
+
+# target to generate assembly for a file
+src/story/ch2_skyros.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch2_skyros.cpp.s
+.PHONY : src/story/ch2_skyros.cpp.s
+
+src/story/ch3_troy.o: src/story/ch3_troy.cpp.o
+.PHONY : src/story/ch3_troy.o
+
+# target to build an object file
+src/story/ch3_troy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch3_troy.cpp.o
+.PHONY : src/story/ch3_troy.cpp.o
+
+src/story/ch3_troy.i: src/story/ch3_troy.cpp.i
+.PHONY : src/story/ch3_troy.i
+
+# target to preprocess a source file
+src/story/ch3_troy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch3_troy.cpp.i
+.PHONY : src/story/ch3_troy.cpp.i
+
+src/story/ch3_troy.s: src/story/ch3_troy.cpp.s
+.PHONY : src/story/ch3_troy.s
+
+# target to generate assembly for a file
+src/story/ch3_troy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch3_troy.cpp.s
+.PHONY : src/story/ch3_troy.cpp.s
+
+src/story/ch4_scamander.o: src/story/ch4_scamander.cpp.o
+.PHONY : src/story/ch4_scamander.o
+
+# target to build an object file
+src/story/ch4_scamander.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch4_scamander.cpp.o
+.PHONY : src/story/ch4_scamander.cpp.o
+
+src/story/ch4_scamander.i: src/story/ch4_scamander.cpp.i
+.PHONY : src/story/ch4_scamander.i
+
+# target to preprocess a source file
+src/story/ch4_scamander.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch4_scamander.cpp.i
+.PHONY : src/story/ch4_scamander.cpp.i
+
+src/story/ch4_scamander.s: src/story/ch4_scamander.cpp.s
+.PHONY : src/story/ch4_scamander.s
+
+# target to generate assembly for a file
+src/story/ch4_scamander.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch4_scamander.cpp.s
+.PHONY : src/story/ch4_scamander.cpp.s
+
+src/story/ch5_hector.o: src/story/ch5_hector.cpp.o
+.PHONY : src/story/ch5_hector.o
+
+# target to build an object file
+src/story/ch5_hector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch5_hector.cpp.o
+.PHONY : src/story/ch5_hector.cpp.o
+
+src/story/ch5_hector.i: src/story/ch5_hector.cpp.i
+.PHONY : src/story/ch5_hector.i
+
+# target to preprocess a source file
+src/story/ch5_hector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch5_hector.cpp.i
+.PHONY : src/story/ch5_hector.cpp.i
+
+src/story/ch5_hector.s: src/story/ch5_hector.cpp.s
+.PHONY : src/story/ch5_hector.s
+
+# target to generate assembly for a file
+src/story/ch5_hector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch5_hector.cpp.s
+.PHONY : src/story/ch5_hector.cpp.s
+
+src/story/ch6_loom.o: src/story/ch6_loom.cpp.o
+.PHONY : src/story/ch6_loom.o
+
+# target to build an object file
+src/story/ch6_loom.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch6_loom.cpp.o
+.PHONY : src/story/ch6_loom.cpp.o
+
+src/story/ch6_loom.i: src/story/ch6_loom.cpp.i
+.PHONY : src/story/ch6_loom.i
+
+# target to preprocess a source file
+src/story/ch6_loom.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch6_loom.cpp.i
+.PHONY : src/story/ch6_loom.cpp.i
+
+src/story/ch6_loom.s: src/story/ch6_loom.cpp.s
+.PHONY : src/story/ch6_loom.s
+
+# target to generate assembly for a file
+src/story/ch6_loom.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch6_loom.cpp.s
+.PHONY : src/story/ch6_loom.cpp.s
+
+src/story/ch7_gate.o: src/story/ch7_gate.cpp.o
+.PHONY : src/story/ch7_gate.o
+
+# target to build an object file
+src/story/ch7_gate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch7_gate.cpp.o
+.PHONY : src/story/ch7_gate.cpp.o
+
+src/story/ch7_gate.i: src/story/ch7_gate.cpp.i
+.PHONY : src/story/ch7_gate.i
+
+# target to preprocess a source file
+src/story/ch7_gate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch7_gate.cpp.i
+.PHONY : src/story/ch7_gate.cpp.i
+
+src/story/ch7_gate.s: src/story/ch7_gate.cpp.s
+.PHONY : src/story/ch7_gate.s
+
+# target to generate assembly for a file
+src/story/ch7_gate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/achilles.dir/build.make CMakeFiles/achilles.dir/src/story/ch7_gate.cpp.s
+.PHONY : src/story/ch7_gate.cpp.s
+
 src/tutorial.o: src/tutorial.cpp.o
 .PHONY : src/tutorial.o
 
@@ -705,6 +969,18 @@ help:
 	@echo "... src/enemies_l3.o"
 	@echo "... src/enemies_l3.i"
 	@echo "... src/enemies_l3.s"
+	@echo "... src/enemies_l4.o"
+	@echo "... src/enemies_l4.i"
+	@echo "... src/enemies_l4.s"
+	@echo "... src/enemies_l5.o"
+	@echo "... src/enemies_l5.i"
+	@echo "... src/enemies_l5.s"
+	@echo "... src/enemies_l6.o"
+	@echo "... src/enemies_l6.i"
+	@echo "... src/enemies_l6.s"
+	@echo "... src/enemies_l7.o"
+	@echo "... src/enemies_l7.i"
+	@echo "... src/enemies_l7.s"
 	@echo "... src/game_app.o"
 	@echo "... src/game_app.i"
 	@echo "... src/game_app.s"
@@ -732,6 +1008,9 @@ help:
 	@echo "... src/screens_dialogue.o"
 	@echo "... src/screens_dialogue.i"
 	@echo "... src/screens_dialogue.s"
+	@echo "... src/screens_ending.o"
+	@echo "... src/screens_ending.i"
+	@echo "... src/screens_ending.s"
 	@echo "... src/screens_help.o"
 	@echo "... src/screens_help.i"
 	@echo "... src/screens_help.s"
@@ -753,6 +1032,24 @@ help:
 	@echo "... src/story/ch1_phthia.o"
 	@echo "... src/story/ch1_phthia.i"
 	@echo "... src/story/ch1_phthia.s"
+	@echo "... src/story/ch2_skyros.o"
+	@echo "... src/story/ch2_skyros.i"
+	@echo "... src/story/ch2_skyros.s"
+	@echo "... src/story/ch3_troy.o"
+	@echo "... src/story/ch3_troy.i"
+	@echo "... src/story/ch3_troy.s"
+	@echo "... src/story/ch4_scamander.o"
+	@echo "... src/story/ch4_scamander.i"
+	@echo "... src/story/ch4_scamander.s"
+	@echo "... src/story/ch5_hector.o"
+	@echo "... src/story/ch5_hector.i"
+	@echo "... src/story/ch5_hector.s"
+	@echo "... src/story/ch6_loom.o"
+	@echo "... src/story/ch6_loom.i"
+	@echo "... src/story/ch6_loom.s"
+	@echo "... src/story/ch7_gate.o"
+	@echo "... src/story/ch7_gate.i"
+	@echo "... src/story/ch7_gate.s"
 	@echo "... src/tutorial.o"
 	@echo "... src/tutorial.i"
 	@echo "... src/tutorial.s"

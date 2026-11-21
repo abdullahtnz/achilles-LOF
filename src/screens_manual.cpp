@@ -115,7 +115,7 @@ void GameApp::frame_manual() {
             line("");
             line("How to defend the heel:");
             line("");
-            line("  \u2022 DODGE  \u2014 press D during the enemy's coil.");
+            line("  \u2022 DODGE  \u2014 press D when the coil meter is nearly full.");
             line("  \u2022 FOCUS  \u2014 pre-commits a dodge, no timing needed.");
             line("  \u2022 DEFENSIVE STANCE \u2014 negates the next heel hit.");
             line("  \u2022 HEEL GUARD TOKEN \u2014 earned via story choices.");
@@ -132,7 +132,8 @@ void GameApp::frame_manual() {
             line("FOCUS     spend 1 stamina to auto-dodge next attack.");
             line("          Unlocks at Layer 2.");
             line("");
-            line("DODGE     spend 1 stamina, 400ms window during a coil.");
+            line("DODGE     spend 1 stamina, 500ms window during a coil.");
+            line("          Press as the coil meter nears full.");
             line("");
             line("HEAL      spend 1 stamina, restore 20 HP. Cannot heal");
             line("          a heel strike.");
@@ -175,6 +176,22 @@ void GameApp::frame_manual() {
             line("  TROJAN ARCHER          Layer 3  \u2014 ranged");
             line("  CHARIOTEER             Layer 3  \u2014 multiple attacks");
             line("  HECTOR'S VANGUARD      Layer 3  \u2014 shield wall");
+            line("  DROWNING SOLDIER       Layer 4  \u2014 rising water");
+            line("  RIVER NYMPH            Layer 4  \u2014 undertow");
+            line("  CORPSE-PUPPET          Layer 4  \u2014 the dead rise");
+            line("  SCAMANDER              Layer 4  \u2014 the river god");
+            line("  WALL DEFENDER          Layer 5  \u2014 the gate");
+            line("  APOLLO'S ARCHER        Layer 5  \u2014 aims low");
+            line("  HONOR GUARD            Layer 5  \u2014 Hector's twelve");
+            line("  HECTOR                 Layer 5  \u2014 the greatest duel");
+            line("  PAST DEATH             Layer 6  \u2014 your old wounds");
+            line("  NAMELESS THREAD        Layer 6  \u2014 the unremembered");
+            line("  PHANTOM ACHILLES        Layer 6  \u2014 every death at once");
+            line("  THE MOIRAI             Layer 6  \u2014 three as one");
+            line("  DIVINE ARCHER          Layer 7  \u2014 Apollo's light");
+            line("  HECTOR'S GHOST          Layer 7  \u2014 asks for his name");
+            line("  GATE GUARDIAN          Layer 7  \u2014 the last refusal");
+            line("  APOLLO'S CHOSEN        Layer 7  \u2014 Paris and the god");
             break;
         }
 
@@ -187,8 +204,16 @@ void GameApp::frame_manual() {
             line("  \u2022 Dying heroically (15)");
             line("  \u2022 Finding story fragments");
             line("");
-            line("Kleos unlocks weapons, boons, story branches, and");
-            line("the true ending. Spending arrives in Step 5.");
+            line("Spend kleos at the Loom between runs:");
+            line("");
+            line("  [W]  unlock the next weapon (spear, sword, shield,");
+            line("       chariot, bow). The latest weapon is carried into");
+            line("       every new run and changes your damage.");
+            line("  [T]  ask Thetis for a heel-guard token. A token");
+            line("       survives one heel strike. Up to three per run.");
+            line("");
+            line("Memory fragments are earned at the end of each chapter.");
+            line("Collect all six to unlock the true ending at the gate.");
             break;
 
         case 6:
@@ -204,9 +229,13 @@ void GameApp::frame_manual() {
             line("exactly where you were. Dialogue progress is");
             line("preserved.");
             line("");
-            line("DEATH sends you to your last checkpoint. All kleos");
-            line("is kept. Story flags are kept. The fight resumes");
-            line("from its start.");
+            line("A HEEL HIT ends the thread. You return to the Loom");
+            line("with every kleos you earned, and the story begins");
+            line("again at Phthia. Unlocks, fragments and the Fates'");
+            line("memory all persist between runs.");
+            line("");
+            line("Closing the game mid-run is safe: continue from the");
+            line("menu and the exact scene or fight resumes.");
             break;
 
         case 7:
@@ -219,7 +248,8 @@ void GameApp::frame_manual() {
             line("B \u2014 THE PHANTOM");
             line("  Die too many times consumed by rage. Become one of");
             line("  the past-death phantoms that hunts future Achilles.");
-            line("  Hint: choose Ares. Spam Reckless. Do not grieve.");
+            line("  Hint: choose Ares, refuse Patroclus, die four times.");
+            line("  Unlocks THE NAMELESS THREAD hard mode.");
             line("");
             line("C \u2014 THE TRUE ENDING");
             line("  Collect every Memory Fragment. Learn the truth: you");
